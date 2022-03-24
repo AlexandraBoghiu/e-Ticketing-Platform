@@ -1,15 +1,18 @@
 package events.sports;
 
-import events.Events;
+import events.Event;
 import locations.Locations;
+import sponsor.Sponsor;
+import java.util.Date;
+import java.util.PriorityQueue;
 
-import java.time.LocalDate;
+public abstract class SportsEvents extends Event {
+    protected final String firstTeam;
+    protected final String secondTeam;
 
-public abstract class SportsEvents extends Events {
-    final protected String firstTeam;
-    final protected String secondTeam;
-
-    public SportsEvents(String name, Integer numberOfTickets, double ticketPrice, LocalDate date, String firstTeam, String secondTeam) {
+    public SportsEvents(String name, Integer numberOfTickets, double ticketPrice, Date date, Locations location,
+                        PriorityQueue<Sponsor> sponsors, String firstTeam, String secondTeam) {
+        super(name, numberOfTickets, ticketPrice, date, location, sponsors);
         this.firstTeam = firstTeam;
         this.secondTeam = secondTeam;
     }

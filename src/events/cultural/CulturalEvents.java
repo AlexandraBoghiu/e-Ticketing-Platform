@@ -1,11 +1,8 @@
 package events.cultural;
 
-import events.Events;
-import locations.Locations;
+import events.Event;
 
-import java.time.LocalDate;
-
-public abstract class CulturalEvents extends Events {
+public abstract class CulturalEvents extends Event {
     protected Integer timeLength;
 
     public CulturalEvents() {
