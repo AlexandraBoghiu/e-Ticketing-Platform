@@ -3,11 +3,8 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import client.Client;
-import events.Event;
 import locations.Locations;
-import ticket.Ticket;
+
 
 public class LocationService {
     ArrayList<Locations> locations = new ArrayList<Locations>();
@@ -17,7 +14,7 @@ public class LocationService {
 
     }
 
-    public void createLocation(String parameters) { //works
+    public void createLocation(String parameters) {
         id++;
         String[] parametersArray = parameters.split(", ");
         System.out.println(Arrays.toString(parametersArray));
@@ -25,7 +22,7 @@ public class LocationService {
         System.out.println(location);
         locations.add(location);
     }
-    public Locations getLocationById(Integer id) { //works
+    public Locations getLocationById(Integer id) {
         for (Locations location : locations) {
             if (location.getId().equals(id))
                 return location;

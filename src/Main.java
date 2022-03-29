@@ -1,3 +1,4 @@
+import client.Client;
 import services.ClientService;
 import services.EventsService;
 import services.LocationService;
@@ -16,8 +17,9 @@ public class Main {
         String command, parameters;
         boolean ok = true;
         while (ok) {
-            System.out.println("Please enter a command. Available commands: createClient, createFootballGameEvent, createConcertEvent, createMovieEvent, createSponsor," +
-                    " updateClient, updateFootballGameEvent, updateConcertEvent, updateMovieEvent, updateSponsor, getEvents, getClients, getSponsors, deleteEventByName, exit ");
+            System.out.println("Please enter a command. Available commands: createClient, createFootballGameEvent, createConcertEvent," +
+                    " createMovieEvent, createSponsor, createLocation, updateClient, updateFootballGameEvent, updateConcertEvent," +
+                    " updateMovieEvent, updateSponsor, getEvents, getClients, getSponsors, getSponsorsByType, getSponsorById, deleteEventByName, exit ");
             command = scanner.nextLine();
             switch (command) {
                 case "createClient":
@@ -101,6 +103,11 @@ public class Main {
                 case "getClients":
                     clientService.getClients();
                     break;
+                case "getTicketsByClientId":
+                    System.out.println("Please enter client's id");
+                    parameters = scanner.next();
+                    clientService.getTicketsByClientId(Integer.valueOf(parameters));
+                    break;
                 case "getSponsors":
                     sponsorService.getSponsors();
                     break;
@@ -109,10 +116,20 @@ public class Main {
                     parameters = scanner.next();
                     sponsorService.getSponsorsByType(parameters);
                     break;
-                case "deleteEventByName":
-                    System.out.println("You're deleting an event. Please enter the event's name.");
-                    String name = scanner.nextLine();
-                    eventsService.deleteEventByName(name);
+                case "addSponsorToEvent":
+                    System.out.println("Please enter event's id and the sponsor's id in the following format: eventId, sponsorId");
+                    parameters = scanner.nextLine();
+                    eventsService.addSponsorToEvent(parameters);
+                    break;
+                case "addLocationToEvent":
+                    System.out.println("Please enter event's id and the location's id in the following format: eventId, locationId");
+                    parameters = scanner.nextLine();
+                    eventsService.addLocationToEvent(parameters);
+                    break;
+                case "deleteEventById":
+                    System.out.println("You're deleting an event. Please enter the event's id.");
+                    Integer id = Integer.valueOf(scanner.next());
+                    eventsService.deleteEventById(id);
                     break;
                 case "deleteClientById":
                     System.out.println("You're deleting a client. Please enter the client's id.");
@@ -123,6 +140,11 @@ public class Main {
                     System.out.println("You're deleting a sponsor. Please enter the sponsor's id.");
                     Integer sponsorId = Integer.valueOf(scanner.next());
                     sponsorService.deleteSponsorById(sponsorId);
+                    break;
+                case "buyTicket":
+                    System.out.println("You're buying a ticket. Please enter the client's id and the event's id in the following format: clientId, eventId");
+                    parameters = scanner.nextLine();
+                    clientService.buyTicket(parameters);
                     break;
                 case "exit":
                     ok = false;

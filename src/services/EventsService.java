@@ -10,7 +10,6 @@ import sponsor.SponsorComparator;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.*;
 
 public class EventsService {
@@ -21,10 +20,8 @@ public class EventsService {
     public EventsService() {
     }
 
-    public void createFootballGameEvent(String parameters) throws ParseException { //works
-        // name, numberOfTickets, ticketPrice, date(day/month/year) time(hh:mm), country, city, address, firstTeam, secondTeam, stadium, competition
+    public void createFootballGameEvent(String parameters) throws ParseException {
         String[] parametersArray = parameters.split(", ");
-        //      System.out.println(Arrays.toString(parametersArray));
         id++;
         locationId++;
         PriorityQueue<Sponsor> sponsors = new PriorityQueue<Sponsor>(1, new SponsorComparator());
@@ -37,11 +34,8 @@ public class EventsService {
     }
 
 
-    public void createConcertEvent(String parameters) throws ParseException {  //works
-        // name, newNumberOfTickets, newTicketPrice, newDate(day/month/year) newTime(hh:mm), newCountry, newCity, " +
-        // timeLength, artist, genre
+    public void createConcertEvent(String parameters) throws ParseException {
         String[] parametersArray = parameters.split(", ");
-        //   System.out.println(Arrays.toString(parametersArray));
         id++;
         locationId++;
         PriorityQueue<Sponsor> sponsors = new PriorityQueue(1, new SponsorComparator());
@@ -53,11 +47,8 @@ public class EventsService {
         this.events.add(concert);
     }
 
-    public void createMovieEvent(String parameters) throws ParseException { //works
-        // (String name, Integer numberOfTickets, double ticketPrice, Date date, Locations location,
-        //                  PriorityQueue<Sponsor> sponsors, Integer timeLength, String genre, String director, Integer yearOfProduction)
+    public void createMovieEvent(String parameters) throws ParseException {
         String[] parametersArray = parameters.split(", ");
-        //    System.out.println(Arrays.toString(parametersArray));
         id++;
         locationId++;
         PriorityQueue<Sponsor> sponsors = new PriorityQueue(1, new SponsorComparator());
@@ -69,12 +60,10 @@ public class EventsService {
         this.events.add(movie);
     }
 
-    public void updateFootballGameEvent(String parameters) throws ParseException { //works
-        // name, newNumberOfTickets, newTicketPrice, newDate(day/month/year) newTime(hh:mm), newCountry, newCity, " +
-        //                            "newAddress, newStadium
+    public void updateFootballGameEvent(String parameters) throws ParseException {
         String[] parametersArray = parameters.split(", ");
-        String oldEventName = parametersArray[0];
-        FootballGames eventToUpdate = (FootballGames) getEventByName(oldEventName);
+        Integer oldEventId = Integer.valueOf(parametersArray[0]);
+        FootballGames eventToUpdate = (FootballGames) getEventById(oldEventId);
         Locations location = new Locations(locationId, parametersArray[4], parametersArray[5], parametersArray[6]);
         Date eventDate = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(parametersArray[3]);
         eventToUpdate.setDate(eventDate);
@@ -84,10 +73,10 @@ public class EventsService {
         eventToUpdate.setStadium(parametersArray[6]);
     }
 
-    public void updateConcertEvent(String parameters) throws ParseException { //works
+    public void updateConcertEvent(String parameters) throws ParseException {
         String[] parametersArray = parameters.split(", ");
-        String oldEventName = parametersArray[0];
-        Concerts eventToUpdate = (Concerts) getEventByName(oldEventName);
+        Integer oldEventId = Integer.valueOf(parametersArray[0]);
+        Concerts eventToUpdate = (Concerts) getEventById(oldEventId);
         Locations location = new Locations(locationId, parametersArray[4], parametersArray[5], parametersArray[6]);
         Date eventDate = (new SimpleDateFormat("dd/MM/yyyy HH:mm")).parse(parametersArray[3]);
         eventToUpdate.setDate(eventDate);
@@ -97,10 +86,10 @@ public class EventsService {
         eventToUpdate.setTimeLength(Integer.valueOf(parametersArray[7]));
     }
 
-    public void updateMovieEvent(String parameters) throws ParseException { //works
+    public void updateMovieEvent(String parameters) throws ParseException {
         String[] parametersArray = parameters.split(", ");
-        String oldEventName = parametersArray[0];
-        Movies eventToUpdate = (Movies) getEventByName(oldEventName);
+        Integer oldEventId = Integer.valueOf(parametersArray[0]);
+        Movies eventToUpdate = (Movies) getEventById(oldEventId);
         Locations location = new Locations(locationId, parametersArray[4], parametersArray[5], parametersArray[6]);
         Date eventDate = (new SimpleDateFormat("dd/MM/yyyy HH:mm")).parse(parametersArray[3]);
         eventToUpdate.setDate(eventDate);
@@ -109,11 +98,11 @@ public class EventsService {
         eventToUpdate.setNumberOfTickets(Integer.valueOf(parametersArray[1]));
     }
 
-    public void addEvent(Event event) {
+    private void addEvent(Event event) {
         this.events.add(event);
     }
 
-    public void getEvents() { //works
+    public void getEvents() {
         if (this.events.size() == 0) {
             System.out.println("There are 0 events.");
         } else for (Event event : this.events) {
@@ -121,9 +110,9 @@ public class EventsService {
         }
     }
 
-    public void deleteEventByName(String name) { //works
+    public void deleteEventById(Integer id) {
         for (Event event : events) {
-            if (event.getName().equals(name)) {
+            if (event.getId().equals(id)) {
                 this.events.remove(event);
                 System.out.println(event.getName() + " has been successfully removed.");
                 break;
@@ -131,15 +120,7 @@ public class EventsService {
         }
     }
 
-    public Event getEventByName(String name) { //works
-        for (Event event : events) {
-            if (event.getName().equals(name))
-                return event;
-        }
-        return null;
-    }
-
-    public Event getEventById(Integer id) { //works
+    public Event getEventById(Integer id) {
         for (Event event : events) {
             if (event.getId().equals(id))
                 return event;
@@ -147,7 +128,10 @@ public class EventsService {
         return null;
     }
 
-    public void addSponsor(Integer eventId, Integer sponsorId) {
+    public void addSponsorToEvent(String parameters) {
+        String[] parametersArray = parameters.split(", ");
+        Integer sponsorId = Integer.valueOf(parametersArray[1]);
+        Integer eventId = Integer.valueOf(parametersArray[0]);
         SponsorService sponsorService = new SponsorService();
         Sponsor sponsor = sponsorService.getSponsorById(sponsorId);
         Event event = getEventById(eventId);
@@ -156,7 +140,10 @@ public class EventsService {
         else System.out.println(eventId + " does not exist.");
     }
 
-    public void addLocation(Integer eventId, Integer locationId) {
+    public void addLocationToEvent(String parameters) {
+        String[] parametersArray = parameters.split(", ");
+        Integer locationId = Integer.valueOf(parametersArray[1]);
+        Integer eventId = Integer.valueOf(parametersArray[0]);
         LocationService locationService = new LocationService();
         Locations location = locationService.getLocationById(locationId);
         Event event = getEventById(eventId);
