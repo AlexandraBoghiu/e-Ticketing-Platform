@@ -8,25 +8,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ClientService {
-    ArrayList<Client> clients = new ArrayList<Client>();
+    static ArrayList<Client> clients = new ArrayList<Client>();
     static Integer id = 0;
 
     public void createClient(String parameters) {
         id++;
         String[] parametersArray = parameters.split(", ");
-        System.out.println(Arrays.toString(parametersArray));
         ArrayList<Ticket> tickets = new ArrayList<Ticket>();
-        Client client = new Client(id, parametersArray[0], parametersArray[1], tickets);
-        System.out.println(client);
+        Client client = new Client(id, parametersArray[0].trim(), parametersArray[1].trim(), tickets);
         clients.add(client);
+        System.out.println("Client added succesfully. Id: " + id.toString() + "\n");
     }
 
     public void updateClient(String parameters) {
         String[] parametersArray = parameters.split(", ");
         System.out.println(Arrays.toString(parametersArray));
         Client client = getClientById(Integer.parseInt(parametersArray[0]));
-        client.setFirstName(parametersArray[1]);
-        client.setLastName(parametersArray[2]);
+        client.setFirstName(parametersArray[1].trim());
+        client.setLastName(parametersArray[2].trim());
+        System.out.println("Client updated succesfully.\n");
     }
 
     private Client getClientById(Integer clientId) {
@@ -38,9 +38,9 @@ public class ClientService {
     }
 
     public void getClients() { //works
-        if (this.clients.size() == 0) {
+        if (clients.size() == 0) {
             System.out.println("There are 0 clients :(.");
-        } else for (Client client : this.clients) {
+        } else for (Client client : clients) {
             System.out.println(client);
         }
     }
@@ -48,7 +48,7 @@ public class ClientService {
     public void deleteClientById(Integer id) {
         for (Client client : clients) {
             if (client.getId().equals(id)) {
-                this.clients.remove(client);
+                clients.remove(client);
                 System.out.println(client + " has been successfully removed.");
                 break;
             }

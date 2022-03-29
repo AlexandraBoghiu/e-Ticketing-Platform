@@ -6,13 +6,14 @@ import sponsor.Sponsor;
 
 import java.util.Date;
 import java.util.PriorityQueue;
+import java.util.TreeSet;
 
 public class FootballGames extends SportsEvents {
     private String stadium;
     private final String competition;
 
     public FootballGames(Integer id, String name, Integer numberOfTickets, double ticketPrice, Date date, Locations location,
-                         PriorityQueue<Sponsor> sponsors, String firstTeam, String secondTeam, String stadium, String competition) {
+                         TreeSet<Sponsor> sponsors, String firstTeam, String secondTeam, String stadium, String competition) {
         super(id, name, numberOfTickets, ticketPrice, date, location, sponsors, firstTeam, secondTeam);
         this.competition = competition;
         this.stadium = stadium;

@@ -5,7 +5,7 @@ import locations.Locations;
 import sponsor.Sponsor;
 
 import java.util.Date;
-import java.util.PriorityQueue;
+import java.util.TreeSet;
 
 public class Movies extends CulturalEvents {
     final private String genre;
@@ -13,7 +13,7 @@ public class Movies extends CulturalEvents {
     final private Integer yearOfProduction;
 
     public Movies(Integer id, String name, Integer numberOfTickets, double ticketPrice, Date date, Locations location,
-                  PriorityQueue<Sponsor> sponsors, Integer timeLength, String genre, String director, Integer yearOfProduction) {
+                  TreeSet<Sponsor> sponsors, Integer timeLength, String genre, String director, Integer yearOfProduction) {
         super(id, name, numberOfTickets, ticketPrice, date, location, sponsors, timeLength);
         this.genre = genre;
         this.director = director;

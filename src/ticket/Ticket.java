@@ -1,6 +1,5 @@
 package ticket;
 
-import client.Client;
 import events.Event;
 public class Ticket {
     private double price;
@@ -25,5 +24,13 @@ public class Ticket {
 
     public void setEvent(Event event) {
         this.event = event;
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "price=" + price +
+                ", event=" + event +
+                '}';
     }
 }

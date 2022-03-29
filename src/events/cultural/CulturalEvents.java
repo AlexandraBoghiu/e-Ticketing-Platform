@@ -5,13 +5,13 @@ import locations.Locations;
 import sponsor.Sponsor;
 
 import java.util.Date;
-import java.util.PriorityQueue;
+import java.util.TreeSet;
 
 public abstract class CulturalEvents extends Event {
     protected Integer timeLength;
 
     public CulturalEvents(Integer id, String name, Integer numberOfTickets, double ticketPrice, Date date, Locations location,
-                          PriorityQueue<Sponsor> sponsors, Integer timeLength) {
+                          TreeSet<Sponsor> sponsors, Integer timeLength) {
         super(id, name, numberOfTickets, ticketPrice, date, location, sponsors);
         this.timeLength = timeLength;
     }

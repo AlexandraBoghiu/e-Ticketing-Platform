@@ -1,20 +1,20 @@
 package services;
 
 import sponsor.Sponsor;
+import sponsor.SponsorComparator;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
 
 public class SponsorService {
-    ArrayList<Sponsor> sponsors = new ArrayList<Sponsor>();
+    static ArrayList<Sponsor> sponsors = new ArrayList<Sponsor>();
     static Integer id = 0;
 
     public void createSponsor(String parameters) {
         id++;
         String[] parametersArray = parameters.split(", ");
-        System.out.println(Arrays.toString(parametersArray));
         Sponsor sponsor = new Sponsor(id, parametersArray[0], parametersArray[1]);
-        System.out.println(sponsor);
         sponsors.add(sponsor);
     }
     public void updateSponsor(String parameters) {

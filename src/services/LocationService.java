@@ -7,7 +7,7 @@ import locations.Locations;
 
 
 public class LocationService {
-    ArrayList<Locations> locations = new ArrayList<Locations>();
+    static ArrayList<Locations> locations = new ArrayList<Locations>();
     static Integer id = 0;
 
     public LocationService() {

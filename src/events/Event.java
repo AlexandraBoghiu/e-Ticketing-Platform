@@ -3,6 +3,7 @@ package events;
 
 import java.util.Date;
 import java.util.PriorityQueue;
+import java.util.TreeSet;
 
 import locations.Locations;
 import sponsor.*;
@@ -14,9 +15,9 @@ public abstract class Event {
     protected double ticketPrice;
     protected Date date;
     protected Locations location;
-    protected PriorityQueue<Sponsor> sponsors = new PriorityQueue<Sponsor>(1, new SponsorComparator());
+    protected TreeSet<Sponsor> sponsors = new TreeSet<Sponsor>(new SponsorComparator());
 
-    protected Event(Integer id, String name, Integer numberOfTickets, double ticketPrice, Date date, Locations location, PriorityQueue<Sponsor> sponsors) {
+    protected Event(Integer id, String name, Integer numberOfTickets, double ticketPrice, Date date, Locations location, TreeSet<Sponsor> sponsors) {
         this.id = id;
         this.name = name;
         this.numberOfTickets = numberOfTickets;
@@ -75,13 +76,13 @@ public abstract class Event {
         return id;
     }
 
-    public PriorityQueue<Sponsor> getSponsors() {
+    public TreeSet<Sponsor> getSponsors() {
         return sponsors;
     }
     public void setSponsor(Sponsor sponsor) {
         this.sponsors.add(sponsor);
     }
-    public void setSponsors(PriorityQueue<Sponsor> sponsors) {
+    public void setSponsors(TreeSet<Sponsor> sponsors) {
         this.sponsors = sponsors;
     }
 }

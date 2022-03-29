@@ -12,6 +12,6 @@ public class SponsorComparator implements Comparator<Sponsor> {
             return 1;
         else if ((s2.getType().equals("gold")) && (s1.getType().equals("silver") || s1.getType().equals("bronze")))
             return 1;
-        else return 0;
+        else return 1;
     }
 }

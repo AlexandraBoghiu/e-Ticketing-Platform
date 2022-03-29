@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class EventsService {
-    ArrayList<Event> events = new ArrayList<Event>();
+    static ArrayList<Event> events = new ArrayList<Event>();
     static Integer id = 0;
     static Integer locationId = 0;
 
@@ -24,12 +24,12 @@ public class EventsService {
         String[] parametersArray = parameters.split(", ");
         id++;
         locationId++;
-        PriorityQueue<Sponsor> sponsors = new PriorityQueue<Sponsor>(1, new SponsorComparator());
-        Locations location = new Locations(locationId, parametersArray[5], parametersArray[6], parametersArray[7]);
+        TreeSet<Sponsor> sponsors = new TreeSet<Sponsor>(new SponsorComparator());
+        Locations location = new Locations(locationId, parametersArray[7].trim(), parametersArray[5].trim(), parametersArray[6].trim());
         Date eventDate = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(parametersArray[3]);
-        FootballGames footballGame = new FootballGames(id, parametersArray[0], Integer.valueOf(parametersArray[1]),
-                Double.parseDouble(parametersArray[2]), eventDate, location, sponsors, parametersArray[7], parametersArray[8],
-                parametersArray[9], parametersArray[10]);
+        FootballGames footballGame = new FootballGames(id, parametersArray[0].trim(), Integer.valueOf(parametersArray[1]),
+                Double.parseDouble(parametersArray[2]), eventDate, location, sponsors, parametersArray[7].trim(), parametersArray[8].trim(),
+                parametersArray[9].trim(), parametersArray[10].trim());
         events.add(footballGame);
     }
 
@@ -38,46 +38,46 @@ public class EventsService {
         String[] parametersArray = parameters.split(", ");
         id++;
         locationId++;
-        PriorityQueue<Sponsor> sponsors = new PriorityQueue(1, new SponsorComparator());
-        Locations location = new Locations(locationId, parametersArray[5], parametersArray[6], parametersArray[7]);
+        TreeSet<Sponsor> sponsors = new TreeSet<Sponsor>(new SponsorComparator());
+        Locations location = new Locations(locationId, parametersArray[4].trim(), parametersArray[5].trim(), parametersArray[6].trim());
         Date eventDate = (new SimpleDateFormat("dd/MM/yyyy HH:mm")).parse(parametersArray[3]);
-        Concerts concert = new Concerts(id, parametersArray[0], Integer.valueOf(parametersArray[1]),
+        Concerts concert = new Concerts(id, parametersArray[0].trim(), Integer.valueOf(parametersArray[1]),
                 Double.parseDouble(parametersArray[2]), eventDate, location, sponsors, Integer.valueOf(parametersArray[7]),
-                parametersArray[8], parametersArray[9]);
-        this.events.add(concert);
+                parametersArray[8].trim(), parametersArray[9].trim());
+        events.add(concert);
     }
 
     public void createMovieEvent(String parameters) throws ParseException {
         String[] parametersArray = parameters.split(", ");
         id++;
         locationId++;
-        PriorityQueue<Sponsor> sponsors = new PriorityQueue(1, new SponsorComparator());
-        Locations location = new Locations(locationId, parametersArray[5], parametersArray[6], parametersArray[7]);
+        TreeSet<Sponsor> sponsors = new TreeSet<Sponsor>(new SponsorComparator());
+        Locations location = new Locations(locationId, parametersArray[4].trim(), parametersArray[5].trim(), parametersArray[6].trim());
         Date eventDate = (new SimpleDateFormat("dd/MM/yyyy HH:mm")).parse(parametersArray[3]);
-        Movies movie = new Movies(id, parametersArray[0], Integer.valueOf(parametersArray[1]),
+        Movies movie = new Movies(id, parametersArray[0].trim(), Integer.valueOf(parametersArray[1]),
                 Double.parseDouble(parametersArray[2]), eventDate, location, sponsors, Integer.valueOf(parametersArray[7]),
-                parametersArray[8], parametersArray[9], Integer.valueOf(parametersArray[10]));
-        this.events.add(movie);
+                parametersArray[8].trim(), parametersArray[9].trim(), Integer.valueOf(parametersArray[10]));
+        events.add(movie);
     }
 
     public void updateFootballGameEvent(String parameters) throws ParseException {
         String[] parametersArray = parameters.split(", ");
         Integer oldEventId = Integer.valueOf(parametersArray[0]);
         FootballGames eventToUpdate = (FootballGames) getEventById(oldEventId);
-        Locations location = new Locations(locationId, parametersArray[4], parametersArray[5], parametersArray[6]);
+        Locations location = new Locations(locationId, parametersArray[6].trim(), parametersArray[5].trim(), parametersArray[4].trim());
         Date eventDate = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(parametersArray[3]);
         eventToUpdate.setDate(eventDate);
         eventToUpdate.setLocation(location);
         eventToUpdate.setTicketPrice(Double.parseDouble(parametersArray[2]));
         eventToUpdate.setNumberOfTickets(Integer.valueOf(parametersArray[1]));
-        eventToUpdate.setStadium(parametersArray[6]);
+        eventToUpdate.setStadium(parametersArray[6].trim());
     }
 
     public void updateConcertEvent(String parameters) throws ParseException {
         String[] parametersArray = parameters.split(", ");
         Integer oldEventId = Integer.valueOf(parametersArray[0]);
         Concerts eventToUpdate = (Concerts) getEventById(oldEventId);
-        Locations location = new Locations(locationId, parametersArray[4], parametersArray[5], parametersArray[6]);
+        Locations location = new Locations(locationId, parametersArray[3].trim(), parametersArray[4].trim(), parametersArray[5].trim());
         Date eventDate = (new SimpleDateFormat("dd/MM/yyyy HH:mm")).parse(parametersArray[3]);
         eventToUpdate.setDate(eventDate);
         eventToUpdate.setLocation(location);
@@ -90,7 +90,7 @@ public class EventsService {
         String[] parametersArray = parameters.split(", ");
         Integer oldEventId = Integer.valueOf(parametersArray[0]);
         Movies eventToUpdate = (Movies) getEventById(oldEventId);
-        Locations location = new Locations(locationId, parametersArray[4], parametersArray[5], parametersArray[6]);
+        Locations location = new Locations(locationId, parametersArray[4].trim(), parametersArray[5].trim(), parametersArray[6].trim());
         Date eventDate = (new SimpleDateFormat("dd/MM/yyyy HH:mm")).parse(parametersArray[3]);
         eventToUpdate.setDate(eventDate);
         eventToUpdate.setLocation(location);
@@ -99,21 +99,21 @@ public class EventsService {
     }
 
     private void addEvent(Event event) {
-        this.events.add(event);
+        events.add(event);
     }
 
     public void getEvents() {
-        if (this.events.size() == 0) {
+        if (events.size() == 0) {
             System.out.println("There are 0 events.");
-        } else for (Event event : this.events) {
-            System.out.println(event.getName());
+        } else for (Event event : events) {
+            System.out.println(event);
         }
     }
 
     public void deleteEventById(Integer id) {
         for (Event event : events) {
             if (event.getId().equals(id)) {
-                this.events.remove(event);
+                events.remove(event);
                 System.out.println(event.getName() + " has been successfully removed.");
                 break;
             }
@@ -134,11 +134,14 @@ public class EventsService {
         Integer eventId = Integer.valueOf(parametersArray[0]);
         SponsorService sponsorService = new SponsorService();
         Sponsor sponsor = sponsorService.getSponsorById(sponsorId);
+        System.out.println(sponsor);
         Event event = getEventById(eventId);
         if (event != null)
             event.setSponsor(sponsor);
         else System.out.println(eventId + " does not exist.");
     }
+
+
 
     public void addLocationToEvent(String parameters) {
         String[] parametersArray = parameters.split(", ");
