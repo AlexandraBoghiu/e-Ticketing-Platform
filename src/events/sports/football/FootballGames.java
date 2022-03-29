@@ -11,9 +11,9 @@ public class FootballGames extends SportsEvents {
     private String stadium;
     private final String competition;
 
-    public FootballGames(String name, Integer numberOfTickets, double ticketPrice, Date date, Locations location,
+    public FootballGames(Integer id, String name, Integer numberOfTickets, double ticketPrice, Date date, Locations location,
                          PriorityQueue<Sponsor> sponsors, String firstTeam, String secondTeam, String stadium, String competition) {
-        super(name, numberOfTickets, ticketPrice, date, location, sponsors, firstTeam, secondTeam);
+        super(id, name, numberOfTickets, ticketPrice, date, location, sponsors, firstTeam, secondTeam);
         this.competition = competition;
         this.stadium = stadium;
     }
@@ -33,6 +33,7 @@ public class FootballGames extends SportsEvents {
     @Override
     public String toString() {
         return "FootballGames{" +
+                "id=" + id +
                 "name='" + name + '\'' +
                 ", numberOfTickets=" + numberOfTickets +
                 ", ticketPrice=" + ticketPrice +

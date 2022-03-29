@@ -6,14 +6,20 @@ import java.util.ArrayList;
 
 
 public class Client {
+    final private Integer id;
     private String firstName;
     private String lastName;
     private ArrayList<Ticket> tickets;
 
-    public Client(String firstName, String lastName, ArrayList<Ticket> tickets) {
+    public Client(Integer id, String firstName, String lastName, ArrayList<Ticket> tickets) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.tickets = tickets;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getFirstName() {
@@ -38,5 +44,15 @@ public class Client {
 
     public void setTickets(ArrayList<Ticket> tickets) {
         this.tickets = tickets;
+    }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id='" + this.id + '\'' +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", tickets=" + tickets +
+                '}';
     }
 }
