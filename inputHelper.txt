@@ -1,0 +1,43 @@
+createClient
+Eloise, Linville
+Cleve, Garey
+Kendra, Rake
+
+updateClient
+1, Eloise, Lowry
+2, Cleve-Bradford, Garey
+3, Kendra Anna, Rake-Warshall
+
+
+createFootballGameEvent
+Poland - Sweden, 55000, 150, 29/03/2022 21:45, Poland, Chorzow, Silesian Park, Poland, Sweden, Silesia Stadium, World Cup play-off
+Manchester City - Atletico Madrid, 53000, 40, 05/04/2022 22:00, England, Manchester, Etihad Campus, Manchester  City, Atletico Madrid, Etihad Stadium, Champions League Quarter-final
+
+updateFootballGameEvent
+1, 55000, 100, 29/03/2022 20:00, Poland, Chorzow, Silesian Park, Poland, Sweden, Silesia Stadium, World Cup play-off
+2, 1, 40, 10/04/2022 22:00, England, Manchester, Etihad Campus, Manchester  City, Atletico Madrid, Etihad Stadium, Champions League Quarter-final
+
+createConcertEvent
+Placebo @ Romexpo, 2000, 300, 13/07/2022 18:30, Romania, Bucharest, Roxempo, 150, Placebo, Alternative/Indie
+
+updateConcertEvent
+3, 3000, 500.50, 13/07/2022 18:30, Romania, Bucharest, Roxempo, 150, Placebo, Alternative/Indie
+
+createMovieEvent
+Batman, 120, 25, 14/04/2022 18:30, Romania, Buzau, Cinema City, 180, action, Matt Reves, 2022
+
+updateMovieEvent
+4, 100, 30, 16/04/2022 18:30, Romania, Buzau, Cinema City, 180, action, Matt Reves, 2022
+
+createSponsor
+MagicFM, gold
+Pepsi, bronze
+Tazz, silver
+BCR, gold
+
+updateSponsor
+MagicFM, gold
+Pepsi, bronze
+
+
+
