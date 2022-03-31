@@ -30,7 +30,7 @@ public class Concerts extends CulturalEvents {
     @Override
     public String toString() {
         return "Concerts{" +
-                "id=" + id +
+                "id=" + id + '\'' +
                 "name='" + name + '\'' +
                 ", numberOfTickets=" + numberOfTickets +
                 ", ticketPrice=" + ticketPrice +

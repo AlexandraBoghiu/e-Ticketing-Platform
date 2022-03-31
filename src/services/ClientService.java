@@ -58,6 +58,32 @@ public class ClientService {
         if (!ok) System.out.println("Client " + id + " does not exist.");
     }
 
+    public void changePassword(String parameters) {
+        String[] parametersArray = parameters.split(", ");
+        Integer clientId = Integer.valueOf(parametersArray[0]);
+        if (parametersArray[0].length() < 8) System.out.println("Password is too short. (at least 8 characters)");
+        else {
+            Client client = this.getClientById(clientId);
+            if (client != null)
+                client.setPassword(parametersArray[1]);
+        }
+    }
+    public boolean logIn(String parameters) {
+        String[] parametersArray = parameters.split(", ");
+        Integer clientId = Integer.valueOf(parametersArray[0]);
+        String password = parametersArray[1];
+        Client client = this.getClientById(clientId);
+        System.out.println("??");
+        if (client != null)
+        {
+            if (!client.getPassword().equals(password)) {
+                System.out.println("Wrong password.");
+                return false;
+            }
+            else return true;
+        }
+        return false;
+    }
     public void buyTicket(String parameters) {
         String[] parametersArray = parameters.split(", ");
         Integer clientId = Integer.valueOf(parametersArray[0]);

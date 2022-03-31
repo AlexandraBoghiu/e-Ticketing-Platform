@@ -9,6 +9,7 @@ public class Client {
     final private Integer id;
     private String firstName;
     private String lastName;
+    private String password;
     private ArrayList<Ticket> tickets;
 
     public Client(Integer id, String firstName, String lastName, ArrayList<Ticket> tickets) {
@@ -16,6 +17,15 @@ public class Client {
         this.firstName = firstName;
         this.lastName = lastName;
         this.tickets = tickets;
+        this.password = "tempPassword";
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Integer getId() {
