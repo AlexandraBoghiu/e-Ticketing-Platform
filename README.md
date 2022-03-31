@@ -4,7 +4,7 @@
   The admin can create cultural events (Movies, Concerts), sports events (Football Matches), update and delete them. The events can be given sponsors and a location. In addition, the admin can create, update, and delete users, can display data about customers, events, sponsors and can buy event tickets for any user.
   Each user is assigned a temporary password which they can change later. He logs into his account, from where he can search for events, view sponsors and buy tickets.
   
-  I attached a txt file with some example inputs to make testing easier. The admin has a "change" method which switches from an "admin" account to a "client" one for testing purposes. To log in as a user (after creating one as an admin), enter "tempPassword" as password.
+  I attached a txt file in stage1 branch with some example inputs to make testing easier. The admin has a "change" method which switches from an "admin" account to a "client" one for testing purposes. To log in as a user (after creating one as an admin), enter "tempPassword" as password.
   
 Stage I
 1) System definition
