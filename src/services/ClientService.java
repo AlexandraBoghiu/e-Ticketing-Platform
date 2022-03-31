@@ -1,8 +1,8 @@
 package services;
 
-import client.Client;
-import events.Event;
-import ticket.Ticket;
+import models.client.Client;
+import models.events.Event;
+import models.ticket.Ticket;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -95,8 +95,8 @@ public class ClientService {
         String[] parametersArray = parameters.split(", ");
         Integer clientId = Integer.valueOf(parametersArray[0]);
         Integer eventId = Integer.valueOf(parametersArray[1]);
-        EventsService eventsService = new EventsService();
-        Event event = eventsService.getEventById(eventId);
+        EventService eventService = new EventService();
+        Event event = eventService.getEventById(eventId);
         Client client = this.getClientById(clientId);
         if (client != null) {
             if (event != null) {

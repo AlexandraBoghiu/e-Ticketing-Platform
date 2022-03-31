@@ -1,19 +1,19 @@
-package events.cultural.movies;
+package models.events.cultural.movies;
 
-import events.cultural.CulturalEvents;
-import locations.Locations;
-import sponsor.Sponsor;
+import models.events.cultural.CulturalEvent;
+import models.locations.Location;
+import models.sponsor.Sponsor;
 
 import java.util.Date;
 import java.util.TreeSet;
 
-public class Movies extends CulturalEvents {
+public class Movie extends CulturalEvent {
     final private String genre;
     final private String director;
     final private Integer yearOfProduction;
 
-    public Movies(Integer id, String name, Integer numberOfTickets, double ticketPrice, Date date, Locations location,
-                  TreeSet<Sponsor> sponsors, Integer timeLength, String genre, String director, Integer yearOfProduction) {
+    public Movie(Integer id, String name, Integer numberOfTickets, double ticketPrice, Date date, Location location,
+                 TreeSet<Sponsor> sponsors, Integer timeLength, String genre, String director, Integer yearOfProduction) {
         super(id, name, numberOfTickets, ticketPrice, date, location, sponsors, timeLength);
         this.genre = genre;
         this.director = director;

@@ -1,10 +1,8 @@
 package services;
 
-import sponsor.Sponsor;
-import sponsor.SponsorComparator;
+import models.sponsor.Sponsor;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 public class SponsorService {

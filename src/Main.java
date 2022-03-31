@@ -1,5 +1,5 @@
 import services.ClientService;
-import services.EventsService;
+import services.EventService;
 import services.LocationService;
 import services.SponsorService;
 
@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws ParseException, InterruptedException {
         Scanner scanner = new Scanner(System.in);
-        EventsService eventsService = new EventsService();
+        EventService eventService = new EventService();
         ClientService clientService = new ClientService();
         SponsorService sponsorService = new SponsorService();
         LocationService locationService = new LocationService();
@@ -47,7 +47,7 @@ public class Main {
                                 "address, firstTeam, secondTeam, stadium, competition");
                         parameters = scanner.nextLine();
                         try {
-                            eventsService.createFootballGameEvent(parameters);
+                            eventService.createFootballGameEvent(parameters);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -58,7 +58,7 @@ public class Main {
                                 "address, timeLength, artist, genre");
                         parameters = scanner.nextLine();
                         try {
-                            eventsService.createConcertEvent(parameters);
+                            eventService.createConcertEvent(parameters);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -69,7 +69,7 @@ public class Main {
                                 "address, timeLength, genre, director, yearOfProduction");
                         parameters = scanner.nextLine();
                         try {
-                            eventsService.createMovieEvent(parameters);
+                            eventService.createMovieEvent(parameters);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -101,7 +101,7 @@ public class Main {
                                 "enter the old data for those fields. Note that the event's name, teams and competition cannot be changed.");
                         parameters = scanner.nextLine();
                         try {
-                            eventsService.updateFootballGameEvent(parameters);
+                            eventService.updateFootballGameEvent(parameters);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -113,7 +113,7 @@ public class Main {
                                 "enter the old data for those fields. Note that the event's name, artist and genre cannot be changed.");
                         parameters = scanner.nextLine();
                         try {
-                            eventsService.updateConcertEvent(parameters);
+                            eventService.updateConcertEvent(parameters);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -125,7 +125,7 @@ public class Main {
                                 "enter the old data for those fields. Note that the event's name, movie, genre, director and year of production cannot be changed.");
                         parameters = scanner.nextLine();
                         try {
-                            eventsService.updateMovieEvent(parameters);
+                            eventService.updateMovieEvent(parameters);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -141,7 +141,7 @@ public class Main {
                         }
                         break;
                     case "getEvents":
-                        eventsService.getEvents();
+                        eventService.getEvents();
                         break;
                     case "getClients":
                         clientService.getClients();
@@ -171,7 +171,7 @@ public class Main {
                         System.out.println("Please enter event's id and the sponsor's id in the following format: eventId, sponsorId");
                         parameters = scanner.nextLine();
                         try {
-                            eventsService.addSponsorToEvent(parameters);
+                            eventService.addSponsorToEvent(parameters);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -180,7 +180,7 @@ public class Main {
                         System.out.println("You're deleting an event. Please enter the event's id.");
                         try {
                             Integer id = Integer.valueOf(scanner.nextLine());
-                            eventsService.deleteEventById(id);
+                            eventService.deleteEventById(id);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -213,7 +213,6 @@ public class Main {
                         }
                         break;
                     case "change":
-                        System.out.println("okfrt");
                         admin = false;
                         client = true;
                     case "exit":
@@ -261,7 +260,7 @@ public class Main {
                                     }
                                     break;
                                 case "getEvents":
-                                    eventsService.getEvents();
+                                    eventService.getEvents();
                                     break;
                                 case "getTickets":
                                     parameters = clientId.trim();

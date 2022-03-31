@@ -1,6 +1,6 @@
-package client;
+package models.client;
 
-import ticket.Ticket;
+import models.ticket.Ticket;
 
 import java.util.ArrayList;
 

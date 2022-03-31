@@ -1,18 +1,18 @@
-package events.cultural.concerts;
+package models.events.cultural.concerts;
 
-import events.cultural.CulturalEvents;
-import locations.Locations;
-import sponsor.Sponsor;
+import models.events.cultural.CulturalEvent;
+import models.locations.Location;
+import models.sponsor.Sponsor;
 
 import java.util.Date;
 import java.util.TreeSet;
 
-public class Concerts extends CulturalEvents {
+public class Concert extends CulturalEvent {
     final private String artist;
     final private String genre;
 
-    public Concerts(Integer id, String name, Integer numberOfTickets, double ticketPrice, Date date, Locations location,
-                    TreeSet<Sponsor> sponsors, Integer timeLength, String artist, String genre) {
+    public Concert(Integer id, String name, Integer numberOfTickets, double ticketPrice, Date date, Location location,
+                   TreeSet<Sponsor> sponsors, Integer timeLength, String artist, String genre) {
         super(id, name, numberOfTickets, ticketPrice, date, location, sponsors, timeLength);
         this.artist = artist;
         this.genre = genre;

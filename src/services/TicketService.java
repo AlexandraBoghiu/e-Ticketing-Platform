@@ -1,7 +1,6 @@
 package services;
 
-import events.Event;
-import ticket.Ticket;
+import models.ticket.Ticket;
 
 import java.util.ArrayList;
 

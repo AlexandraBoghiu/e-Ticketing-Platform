@@ -2,20 +2,20 @@ package services;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import locations.Locations;
+
+import models.locations.Location;
 
 
 public class LocationService {
-    static ArrayList<Locations> locations = new ArrayList<Locations>();
+    static ArrayList<Location> locations = new ArrayList<Location>();
     static Integer id = 0;
 
     public LocationService() {
 
     }
 
-    public Locations getLocationById(Integer id) {
-        for (Locations location : locations) {
+    public Location getLocationById(Integer id) {
+        for (Location location : locations) {
             if (location.getId().equals(id))
                 return location;
         }

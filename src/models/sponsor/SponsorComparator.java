@@ -1,4 +1,4 @@
-package sponsor;
+package models.sponsor;
 
 import java.util.Comparator;
 

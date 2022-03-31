@@ -1,12 +1,11 @@
-package events;
+package models.events;
 
 
 import java.util.Date;
-import java.util.PriorityQueue;
 import java.util.TreeSet;
 
-import locations.Locations;
-import sponsor.*;
+import models.locations.Location;
+import models.sponsor.*;
 
 public abstract class Event {
     final protected Integer id;
@@ -14,10 +13,10 @@ public abstract class Event {
     protected Integer numberOfTickets;
     protected double ticketPrice;
     protected Date date;
-    protected Locations location;
+    protected Location location;
     protected TreeSet<Sponsor> sponsors = new TreeSet<Sponsor>(new SponsorComparator());
 
-    protected Event(Integer id, String name, Integer numberOfTickets, double ticketPrice, Date date, Locations location, TreeSet<Sponsor> sponsors) {
+    protected Event(Integer id, String name, Integer numberOfTickets, double ticketPrice, Date date, Location location, TreeSet<Sponsor> sponsors) {
         this.id = id;
         this.name = name;
         this.numberOfTickets = numberOfTickets;
@@ -64,11 +63,11 @@ public abstract class Event {
         this.date = date;
     }
 
-    public Locations getLocation() {
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocation(Locations location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 

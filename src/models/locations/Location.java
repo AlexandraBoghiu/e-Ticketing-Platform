@@ -1,12 +1,12 @@
-package locations;
+package models.locations;
 
-public class Locations {
+public class Location {
     final protected Integer id;
     private String country;
     private String city;
     private String address;
 
-    public Locations(Integer id, String country, String city, String address) {
+    public Location(Integer id, String country, String city, String address) {
         this.id = id;
         this.country = country;
         this.city = city;
