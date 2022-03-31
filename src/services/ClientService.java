@@ -46,13 +46,16 @@ public class ClientService {
     }
 
     public void deleteClientById(Integer id) {
+        boolean ok = false;
         for (Client client : clients) {
             if (client.getId().equals(id)) {
                 clients.remove(client);
                 System.out.println(client + " has been successfully removed.");
+                ok = true;
                 break;
             }
         }
+        if (!ok) System.out.println("Client " + id + " does not exist.");
     }
 
     public void buyTicket(String parameters) {

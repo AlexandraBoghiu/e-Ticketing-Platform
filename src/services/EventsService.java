@@ -141,18 +141,4 @@ public class EventsService {
         else System.out.println(eventId + " does not exist.");
     }
 
-
-
-    public void addLocationToEvent(String parameters) {
-        String[] parametersArray = parameters.split(", ");
-        Integer locationId = Integer.valueOf(parametersArray[1]);
-        Integer eventId = Integer.valueOf(parametersArray[0]);
-        LocationService locationService = new LocationService();
-        Locations location = locationService.getLocationById(locationId);
-        Event event = getEventById(eventId);
-        if (event != null)
-            event.setLocation(location);
-        else System.out.println(eventId + " does not exist.");
-    }
-
 }

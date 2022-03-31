@@ -14,14 +14,6 @@ public class LocationService {
 
     }
 
-    public void createLocation(String parameters) {
-        id++;
-        String[] parametersArray = parameters.split(", ");
-        System.out.println(Arrays.toString(parametersArray));
-        Locations location = new Locations(id, parametersArray[0], parametersArray[1], parametersArray[2]);
-        System.out.println(location);
-        locations.add(location);
-    }
     public Locations getLocationById(Integer id) {
         for (Locations location : locations) {
             if (location.getId().equals(id))

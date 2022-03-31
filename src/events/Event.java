@@ -79,9 +79,11 @@ public abstract class Event {
     public TreeSet<Sponsor> getSponsors() {
         return sponsors;
     }
+
     public void setSponsor(Sponsor sponsor) {
         this.sponsors.add(sponsor);
     }
+
     public void setSponsors(TreeSet<Sponsor> sponsors) {
         this.sponsors = sponsors;
     }

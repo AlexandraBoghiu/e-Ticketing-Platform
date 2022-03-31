@@ -77,16 +77,6 @@ public class Main {
                         System.out.println("Not a valid input. Please try again.");
                     }
                     break;
-                case "createLocation":
-                    System.out.println("You're creating a location. Please enter the location's data in the following format:" +
-                            " country, city, address");
-                    parameters = scanner.nextLine();
-                    try {
-                        locationService.createLocation(parameters);
-                    } catch (Exception e) {
-                        System.out.println("Not a valid input. Please try again.");
-                    }
-                    break;
                 case "updateClient":
                     System.out.println("You're updating a client. Please enter the client's updated data in the following format:" +
                             " id, firstName, lastName\n If there is unchanged information, enter the old data for those fields. Note that the client's id cannot be changed.");
@@ -135,7 +125,7 @@ public class Main {
                     break;
                 case "updateSponsor":
                     System.out.println("You're updating a sponsor. Please enter the sponsor's updated data in the following format:" +
-                            " id, name, type. Note that the sponsor's id cannot be changed.");
+                            " id, name. Note that the sponsor's id and type cannot be changed.");
                     parameters = scanner.nextLine();
                     try {
                         sponsorService.updateSponsor(parameters);
@@ -181,8 +171,8 @@ public class Main {
                     break;
                 case "deleteEvent":
                     System.out.println("You're deleting an event. Please enter the event's id.");
-                    Integer id = Integer.valueOf(scanner.next());
                     try {
+                        Integer id = Integer.valueOf(scanner.next());
                         eventsService.deleteEventById(id);
                     } catch (Exception e) {
                         System.out.println("Not a valid input. Please try again.");
@@ -190,8 +180,8 @@ public class Main {
                     break;
                 case "deleteClient":
                     System.out.println("You're deleting a client. Please enter the client's id.");
-                    Integer clientId = Integer.valueOf(scanner.next());
                     try {
+                        Integer clientId = Integer.valueOf(scanner.next());
                         clientService.deleteClientById(clientId);
                     } catch (Exception e) {
                         System.out.println("Not a valid input. Please try again.");
@@ -199,8 +189,7 @@ public class Main {
                     break;
                 case "deleteSponsor":
                     System.out.println("You're deleting a sponsor. Please enter the sponsor's id.");
-                    Integer sponsorId = Integer.valueOf(scanner.next());
-                    try {
+                    try {Integer sponsorId = Integer.valueOf(scanner.next());
                         sponsorService.deleteSponsorById(sponsorId);
                     } catch (Exception e) {
                         System.out.println("Not a valid input. Please try again.");
@@ -216,10 +205,10 @@ public class Main {
                     }
                     break;
                 case "exit":
+                    System.out.println("Have a nice day! :D");
                     ok = false;
                     break;
                 default:
-                    System.out.println("\n");
                     break;
             }
         }
