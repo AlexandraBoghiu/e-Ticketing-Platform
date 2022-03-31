@@ -134,7 +134,6 @@ public class EventsService {
         Integer eventId = Integer.valueOf(parametersArray[0]);
         SponsorService sponsorService = new SponsorService();
         Sponsor sponsor = sponsorService.getSponsorById(sponsorId);
-        System.out.println(sponsor);
         Event event = getEventById(eventId);
         if (event != null)
             event.setSponsor(sponsor);

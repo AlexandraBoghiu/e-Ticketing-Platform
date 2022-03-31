@@ -27,11 +27,10 @@ public class Main {
         while (connected) {
             while (admin) {
                 System.out.println("Please enter a command. Available commands: \nCREATE: createClient, createFootballGameEvent, createConcertEvent," +
-                        " createMovieEvent, createSponsor, createLocation, \nUPDATE: updateClient, updateFootballGameEvent, updateConcertEvent," +
+                        " createMovieEvent, createSponsor, \nUPDATE: updateClient, updateFootballGameEvent, updateConcertEvent," +
                         " updateMovieEvent, updateSponsor, \nGET: getEvents, getClients, getSponsors, getSponsorsByType, \nDELETE: deleteEvent," +
-                        " deleteClient, deleteSponsor,\naddSponsorToEvent, buyTicket, \nexit");
+                        " deleteClient, deleteSponsor,\naddSponsorToEvent, buyTicket, change, \nexit");
                 command = scanner.nextLine();
-                //scanner.nextLine();
                 switch (command) {
                     case "createClient":
                         System.out.println("You're creating a client. Please enter the client's data in the following format: firstName, lastName");
@@ -232,7 +231,6 @@ public class Main {
                 String clientId = null;
                 while (!loggedIn) {
                     System.out.println("Hello! Please enter your id and password to log in in the following format: id, password\n");
-                    //scanner.nextLine();
                     try {
                         parameters = scanner.nextLine();
                         String[] parametersArray = parameters.split(", ");
@@ -241,16 +239,21 @@ public class Main {
                     } catch (Exception e) {
                         System.out.println("Wrong input.");
                     } }
-                    System.out.println("?");
                     if (loggedIn) {
                         while (client) {
-                            System.out.println("Please enter a command. Available commands: \nGET: getEvents, getClients, getSponsors, getSponsorsByType,\naddSponsorToEvent, buyTicket, \nexit ");
+                            System.out.println("Please enter a command. Available commands: getInfo, changePassword, getEvents, getSponsors, getSponsorsByType, buyTicket, exit ");
                             command = scanner.nextLine();
                             switch (command) {
+                                case "getInfo":
+                                    try {
+                                        clientService.getInfo(Integer.valueOf(clientId));
+                                    } catch (Exception e) {
+                                        System.out.println("Error. Please try again.");
+                                    }
+                                    break;
                                 case "changePassword":
                                     System.out.println("You're changing your password. Please write your information in the following format: oldPassword, newPassword");
                                     parameters = clientId.trim() + ", " + scanner.nextLine();
-                                    //System.out.println(parameters);
                                     try {
                                         clientService.changePassword(parameters);
                                     } catch (Exception e) {
@@ -259,9 +262,6 @@ public class Main {
                                     break;
                                 case "getEvents":
                                     eventsService.getEvents();
-                                    break;
-                                case "getClients":
-                                    clientService.getClients();
                                     break;
                                 case "getTickets":
                                     parameters = clientId.trim();

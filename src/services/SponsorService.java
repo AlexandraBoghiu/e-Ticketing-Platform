@@ -25,7 +25,6 @@ public class SponsorService {
 
     public void updateSponsor(String parameters) {
         String[] parametersArray = parameters.split(", ");
-        System.out.println(Arrays.toString(parametersArray));
         Sponsor sponsor = getSponsorById(Integer.parseInt(parametersArray[0]));
         sponsor.setName(parametersArray[1]);
     }

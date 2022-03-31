@@ -36,8 +36,16 @@ public class ClientService {
         }
         return null;
     }
+    public void getInfo(Integer clientId) {
+        for (Client client : clients) {
+            if (client.getId().equals(clientId)) {
+                System.out.println(client);
+                break;
+            }
+        }
+    }
 
-    public void getClients() { //works
+    public void getClients() {
         if (clients.size() == 0) {
             System.out.println("There are 0 clients :(.");
         } else for (Client client : clients) {
@@ -61,7 +69,7 @@ public class ClientService {
     public void changePassword(String parameters) {
         String[] parametersArray = parameters.split(", ");
         Integer clientId = Integer.valueOf(parametersArray[0]);
-        if (parametersArray[0].length() < 8) System.out.println("Password is too short. (at least 8 characters)");
+        if (parametersArray[2].length() < 8) System.out.println("Password is too short. (at least 8 characters)");
         else {
             Client client = this.getClientById(clientId);
             if (client != null)
@@ -73,7 +81,6 @@ public class ClientService {
         Integer clientId = Integer.valueOf(parametersArray[0]);
         String password = parametersArray[1];
         Client client = this.getClientById(clientId);
-        System.out.println("??");
         if (client != null)
         {
             if (!client.getPassword().equals(password)) {

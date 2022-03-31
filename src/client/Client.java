@@ -60,7 +60,7 @@ public class Client {
     public String toString() {
         return "Client{" +
                 "id='" + this.id + '\'' +
-                "firstName='" + firstName + '\'' +
+                ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", tickets=" + tickets +
                 '}';
