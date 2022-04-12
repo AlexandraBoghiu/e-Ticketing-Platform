@@ -4,7 +4,7 @@ Stage I
 1) System definition
 Create a list based on the chosen theme with at least 10 actions/queries that can be done in
 within the system and a list of at least 8 object types.
-  - [ ] 10 actions/queries
+  - [x] 10 actions/queries
   - [x] 8 object types
  
 2) Implementation
