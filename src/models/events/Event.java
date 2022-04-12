@@ -9,12 +9,12 @@ import models.sponsor.*;
 
 public abstract class Event {
     final protected Integer id;
-    protected String name;
-    protected Integer numberOfTickets;
-    protected double ticketPrice;
-    protected Date date;
-    protected Location location;
-    protected TreeSet<Sponsor> sponsors = new TreeSet<Sponsor>(new SponsorComparator());
+    private String name;
+    private Integer numberOfTickets;
+    private double ticketPrice;
+    private Date date;
+    private Location location;
+    private TreeSet<Sponsor> sponsors = new TreeSet<Sponsor>(new SponsorComparator());
 
     protected Event(Integer id, String name, Integer numberOfTickets, double ticketPrice, Date date, Location location, TreeSet<Sponsor> sponsors) {
         this.id = id;

@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 
 public class SponsorService {
-    static ArrayList<Sponsor> sponsors = new ArrayList<Sponsor>();
-    static Integer id = 0;
+    static private ArrayList<Sponsor> sponsors = new ArrayList<Sponsor>();
+    static private Integer id = 0;
 
     public SponsorService() {
     }

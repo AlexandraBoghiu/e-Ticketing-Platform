@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ClientService {
-    static ArrayList<Client> clients = new ArrayList<Client>();
-    static Integer id = 0;
+    static private ArrayList<Client> clients = new ArrayList<Client>();
+    static private Integer id = 0;
 
     public void createClient(String parameters) {
         id++;

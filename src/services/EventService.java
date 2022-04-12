@@ -13,9 +13,9 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class EventService {
-    static ArrayList<Event> events = new ArrayList<Event>();
-    static Integer id = 0;
-    static Integer locationId = 0;
+    static private ArrayList<Event> events = new ArrayList<Event>();
+    static private Integer id = 0;
+    static private Integer locationId = 0;
 
     public EventService() {
     }

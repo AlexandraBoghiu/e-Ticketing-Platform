@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.TreeSet;
 
 public abstract class CulturalEvent extends Event {
-    protected Integer timeLength;
+    private Integer timeLength;
 
     public CulturalEvent(Integer id, String name, Integer numberOfTickets, double ticketPrice, Date date, Location location,
                          TreeSet<Sponsor> sponsors, Integer timeLength) {

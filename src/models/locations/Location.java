@@ -1,7 +1,7 @@
 package models.locations;
 
 public class Location {
-    final protected Integer id;
+    final private Integer id;
     private String country;
     private String city;
     private String address;

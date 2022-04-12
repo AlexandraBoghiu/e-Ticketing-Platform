@@ -7,8 +7,8 @@ import models.locations.Location;
 
 
 public class LocationService {
-    static ArrayList<Location> locations = new ArrayList<Location>();
-    static Integer id = 0;
+    static private ArrayList<Location> locations = new ArrayList<Location>();
+    static private Integer id = 0;
 
     public LocationService() {
 

@@ -36,13 +36,13 @@ public class Movie extends CulturalEvent {
     public String toString() {
         return "Movies{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", numberOfTickets=" + numberOfTickets +
-                ", ticketPrice=" + ticketPrice +
-                ", date=" + date +
-                ", location=" + location +
-                ", sponsors=" + sponsors +
-                ", timeLength=" + timeLength +
+                ", name='" + getName() + '\'' +
+                ", numberOfTickets=" + getNumberOfTickets() +
+                ", ticketPrice=" + getTicketPrice() +
+                ", date=" + getDate() +
+                ", location=" + getLocation() +
+                ", sponsors=" + getSponsors() +
+                ", timeLength=" + getTimeLength() +
                 ", genre='" + genre + '\'' +
                 ", director='" + director + '\'' +
                 ", yearOfProduction=" + yearOfProduction +

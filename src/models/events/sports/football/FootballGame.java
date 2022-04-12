@@ -34,14 +34,14 @@ public class FootballGame extends SportsEvent {
     public String toString() {
         return "FootballGames{" +
                 "id=" + id +
-                "name='" + name + '\'' +
-                ", numberOfTickets=" + numberOfTickets +
-                ", ticketPrice=" + ticketPrice +
-                ", date=" + date +
-                ", location=" + location +
-                ", sponsors=" + sponsors +
-                ", firstTeam='" + firstTeam + '\'' +
-                ", secondTeam='" + secondTeam + '\'' +
+                "name='" + getName() + '\'' +
+                ", numberOfTickets=" + getNumberOfTickets() +
+                ", ticketPrice=" + getTicketPrice() +
+                ", date=" + getDate() +
+                ", location=" + getLocation() +
+                ", sponsors=" + getSponsors() +
+                ", firstTeam='" + getFirstTeam() + '\'' +
+                ", secondTeam='" + getSecondTeam() + '\'' +
                 ", stadium='" + stadium + '\'' +
                 ", competition='" + competition + '\'' +
                 '}';

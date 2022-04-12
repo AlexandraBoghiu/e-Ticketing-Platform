@@ -7,8 +7,8 @@ import java.util.Date;
 import java.util.TreeSet;
 
 public abstract class SportsEvent extends Event {
-    protected final String firstTeam;
-    protected final String secondTeam;
+    private final String firstTeam;
+    private final String secondTeam;
 
     public SportsEvent(Integer id, String name, Integer numberOfTickets, double ticketPrice, Date date, Location location,
                        TreeSet<Sponsor> sponsors, String firstTeam, String secondTeam) {
@@ -17,4 +17,11 @@ public abstract class SportsEvent extends Event {
         this.secondTeam = secondTeam;
     }
 
+    public String getFirstTeam() {
+        return firstTeam;
+    }
+
+    public String getSecondTeam() {
+        return secondTeam;
+    }
 }
