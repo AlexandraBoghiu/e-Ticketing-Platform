@@ -14,8 +14,8 @@ within the system and a list of at least 8 object types.
       - ADMIN: *createClient, createFootballGameEvent, createConcertEvent, createMovieEvent, createSponsor, updateClient, updateFootballGameEvent, updateConcertEvent, updateMovieEvent, updateSponsor, getEvents, getClients, getSponsors, getSponsorsByType, deleteEvent, deleteClient, deleteSponsor, addSponsorToEvent, buyTicket, change, exit*
       - CLIENT: *getInfo, changePassword, getEvents, getSponsors, getSponsorsByType, buyTicket, exit*
   - [x] 8 object types
-      - POJOs: *Client, Event, CulturalEvent, Movie, Concert, SportEvent, FootballGame, Sponsor, Location, Ticket
-      - Services: *ClientService, EventService, SponsorService, LocationService, TicketService *
+      - POJOs: *Client, Event, CulturalEvent, Movie, Concert, SportEvent, FootballGame, Sponsor, Location, Ticket*
+      - Services: *ClientService, EventService, SponsorService, LocationService, TicketService*
 2) Implementation
 Implement an application based on the ones defined in the first step in the Java language.
 The application will contain:
