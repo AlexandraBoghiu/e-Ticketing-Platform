@@ -1,4 +1,4 @@
-package models.sponsor;
+package com.company.models;
 
 public class Sponsor {
     final private Integer id;

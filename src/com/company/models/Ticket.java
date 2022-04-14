@@ -1,6 +1,5 @@
-package models.ticket;
+package com.company.models;
 
-import models.events.Event;
 public class Ticket {
     private double price;
     private Event event;

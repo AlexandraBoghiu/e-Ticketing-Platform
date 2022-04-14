@@ -1,6 +1,6 @@
-package services;
+package com.company.services;
 
-import models.ticket.Ticket;
+import com.company.models.Ticket;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package models.locations;
+package com.company.models;
 
 public class Location {
     final private Integer id;

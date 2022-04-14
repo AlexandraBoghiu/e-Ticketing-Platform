@@ -1,8 +1,5 @@
-package models.events.sports;
+package com.company.models;
 
-import models.events.Event;
-import models.locations.Location;
-import models.sponsor.Sponsor;
 import java.util.Date;
 import java.util.TreeSet;
 

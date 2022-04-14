@@ -1,10 +1,8 @@
-package services;
+package com.company.services;
 
+import com.company.models.Location;
 
 import java.util.ArrayList;
-
-import models.locations.Location;
-
 
 public class LocationService {
     static private ArrayList<Location> locations = new ArrayList<Location>();

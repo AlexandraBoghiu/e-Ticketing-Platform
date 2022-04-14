@@ -1,8 +1,8 @@
-package services;
+package com.company.services;
 
-import models.client.Client;
-import models.events.Event;
-import models.ticket.Ticket;
+import com.company.models.Client;
+import com.company.models.Event;
+import com.company.models.Ticket;
 
 import java.util.ArrayList;
 import java.util.Arrays;

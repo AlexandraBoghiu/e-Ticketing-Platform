@@ -1,16 +1,12 @@
-package services;
+package com.company.services;
 
-import models.events.Event;
-import models.events.cultural.concerts.Concert;
-import models.events.cultural.movies.Movie;
-import models.events.sports.football.FootballGame;
-import models.locations.Location;
-import models.sponsor.Sponsor;
-import models.sponsor.SponsorComparator;
+import com.company.models.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.TreeSet;
 
 public class EventService {
     static private ArrayList<Event> events = new ArrayList<Event>();

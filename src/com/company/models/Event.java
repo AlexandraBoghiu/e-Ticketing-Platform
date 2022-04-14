@@ -1,11 +1,7 @@
-package models.events;
-
+package com.company.models;
 
 import java.util.Date;
 import java.util.TreeSet;
-
-import models.locations.Location;
-import models.sponsor.*;
 
 public abstract class Event {
     final protected Integer id;

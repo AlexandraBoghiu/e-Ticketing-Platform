@@ -1,8 +1,4 @@
-package models.events.sports.football;
-
-import models.events.sports.SportsEvent;
-import models.locations.Location;
-import models.sponsor.Sponsor;
+package com.company.models;
 
 import java.util.Date;
 import java.util.TreeSet;

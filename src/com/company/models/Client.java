@@ -1,9 +1,6 @@
-package models.client;
-
-import models.ticket.Ticket;
+package com.company.models;
 
 import java.util.ArrayList;
-
 
 public class Client {
     final private Integer id;

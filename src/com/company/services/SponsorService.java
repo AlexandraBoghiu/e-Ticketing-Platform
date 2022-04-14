@@ -1,9 +1,8 @@
-package services;
+package com.company.services;
 
-import models.sponsor.Sponsor;
+import com.company.models.Sponsor;
 
 import java.util.ArrayList;
-
 
 public class SponsorService {
     static private ArrayList<Sponsor> sponsors = new ArrayList<Sponsor>();

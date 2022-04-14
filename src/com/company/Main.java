@@ -1,14 +1,15 @@
-import services.ClientService;
-import services.EventService;
-import services.LocationService;
-import services.SponsorService;
+package com.company;
 
-import java.text.ParseException;
+import com.company.services.ClientService;
+import com.company.services.EventService;
+import com.company.services.LocationService;
+import com.company.services.SponsorService;
+
 import java.util.Scanner;
 
 
 public class Main {
-    public static void main(String[] args) throws ParseException, InterruptedException {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         EventService eventService = new EventService();
         ClientService clientService = new ClientService();
