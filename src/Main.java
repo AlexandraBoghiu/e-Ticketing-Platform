@@ -55,7 +55,7 @@ public class Main {
                     case "createConcertEvent":
                         System.out.println("You're creating a concert event. Please enter the event's data in the following format:" +
                                 " name, numberOfTickets, ticketPrice, date(day/month/year) time(hh:mm), country, city, " +
-                                "address, timeLength, artist, genre");
+                                "address, genre, artist");
                         parameters = scanner.nextLine();
                         try {
                             eventService.createConcertEvent(parameters);
@@ -66,7 +66,7 @@ public class Main {
                     case "createMovieEvent":
                         System.out.println("You're creating a movie event. Please enter the event's data in the following format:" +
                                 " name, numberOfTickets, ticketPrice, date(day/month/year) time(HH:mm), country, city, " +
-                                "address, timeLength, genre, director, yearOfProduction");
+                                "address, genre, director, yearOfProduction");
                         parameters = scanner.nextLine();
                         try {
                             eventService.createMovieEvent(parameters);
@@ -109,7 +109,7 @@ public class Main {
                     case "updateConcertEvent":
                         System.out.println("You're updating a concert event. Please enter the event's updated data in the following format:" +
                                 " id, newNumberOfTickets, newTicketPrice, newDate(day/month/year) newTime(hh:mm), newCountry, newCity, " +
-                                "newAddress, newTimeLength\n If there is unchanged information, " +
+                                "newAddress\n If there is unchanged information, " +
                                 "enter the old data for those fields. Note that the event's name, artist and genre cannot be changed.");
                         parameters = scanner.nextLine();
                         try {

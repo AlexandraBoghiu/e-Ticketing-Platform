@@ -42,8 +42,8 @@ public class EventService {
         Location location = new Location(locationId, parametersArray[4].trim(), parametersArray[5].trim(), parametersArray[6].trim());
         Date eventDate = (new SimpleDateFormat("dd/MM/yyyy HH:mm")).parse(parametersArray[3]);
         Concert concert = new Concert(id, parametersArray[0].trim(), Integer.valueOf(parametersArray[1]),
-                Double.parseDouble(parametersArray[2]), eventDate, location, sponsors, Integer.valueOf(parametersArray[7]),
-                parametersArray[8].trim(), parametersArray[9].trim());
+                Double.parseDouble(parametersArray[2]), eventDate, location, sponsors,
+                parametersArray[7].trim(), parametersArray[8].trim());
         events.add(concert);
     }
 
@@ -55,8 +55,8 @@ public class EventService {
         Location location = new Location(locationId, parametersArray[4].trim(), parametersArray[5].trim(), parametersArray[6].trim());
         Date eventDate = (new SimpleDateFormat("dd/MM/yyyy HH:mm")).parse(parametersArray[3]);
         Movie movie = new Movie(id, parametersArray[0].trim(), Integer.valueOf(parametersArray[1]),
-                Double.parseDouble(parametersArray[2]), eventDate, location, sponsors, Integer.valueOf(parametersArray[7]),
-                parametersArray[8].trim(), parametersArray[9].trim(), Integer.valueOf(parametersArray[10]));
+                Double.parseDouble(parametersArray[2]), eventDate, location, sponsors,
+                parametersArray[7].trim(), parametersArray[8].trim(), Integer.valueOf(parametersArray[9]));
         events.add(movie);
     }
 
@@ -77,13 +77,12 @@ public class EventService {
         String[] parametersArray = parameters.split(", ");
         Integer oldEventId = Integer.valueOf(parametersArray[0]);
         Concert eventToUpdate = (Concert) getEventById(oldEventId);
-        Location location = new Location(locationId, parametersArray[3].trim(), parametersArray[4].trim(), parametersArray[5].trim());
+        Location location = new Location(locationId, parametersArray[4].trim(), parametersArray[5].trim(), parametersArray[6].trim());
         Date eventDate = (new SimpleDateFormat("dd/MM/yyyy HH:mm")).parse(parametersArray[3]);
         eventToUpdate.setDate(eventDate);
         eventToUpdate.setLocation(location);
         eventToUpdate.setTicketPrice(Double.parseDouble(parametersArray[2]));
         eventToUpdate.setNumberOfTickets(Integer.valueOf(parametersArray[1]));
-        eventToUpdate.setTimeLength(Integer.valueOf(parametersArray[7]));
     }
 
     public void updateMovieEvent(String parameters) throws ParseException {

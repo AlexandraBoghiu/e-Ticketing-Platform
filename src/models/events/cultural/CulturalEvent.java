@@ -8,19 +8,15 @@ import java.util.Date;
 import java.util.TreeSet;
 
 public abstract class CulturalEvent extends Event {
-    private Integer timeLength;
+    final private String genre;
 
     public CulturalEvent(Integer id, String name, Integer numberOfTickets, double ticketPrice, Date date, Location location,
-                         TreeSet<Sponsor> sponsors, Integer timeLength) {
+                         TreeSet<Sponsor> sponsors, String genre) {
         super(id, name, numberOfTickets, ticketPrice, date, location, sponsors);
-        this.timeLength = timeLength;
+        this.genre = genre;
     }
 
-    public Integer getTimeLength() {
-        return timeLength;
-    }
-
-    public void setTimeLength(Integer timeLength) {
-        this.timeLength = timeLength;
+    public String getGenre() {
+        return genre;
     }
 }
