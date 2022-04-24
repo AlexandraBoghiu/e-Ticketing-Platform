@@ -3,9 +3,10 @@ package com.company.services;
 import com.company.models.Location;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LocationService {
-    static private ArrayList<Location> locations = new ArrayList<Location>();
+    static private List<Location> locations = new ArrayList<Location>();
     static private Integer id = 0;
     private static LocationService instance = null;
 

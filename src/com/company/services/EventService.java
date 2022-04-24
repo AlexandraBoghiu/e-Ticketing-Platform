@@ -6,10 +6,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.TreeSet;
 
 public class EventService {
-    static private ArrayList<Event> events = new ArrayList<Event>();
+    static private List<Event> events = new ArrayList<Event>();
     static private Integer id = 0;
     static private Integer locationId = 0;
     private static EventService instance = null;

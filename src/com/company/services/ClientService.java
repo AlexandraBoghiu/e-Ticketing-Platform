@@ -6,9 +6,10 @@ import com.company.models.Ticket;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ClientService {
-    private static ArrayList<Client> clients = new ArrayList<Client>();
+    private static List<Client> clients = new ArrayList<Client>();
     private static Integer id = 0;
     private static ClientService instance = null;
 
@@ -25,7 +26,7 @@ public class ClientService {
     public void createClient(String parameters) {
         id++;
         String[] parametersArray = parameters.split(", ");
-        ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+        List<Ticket> tickets = new ArrayList<Ticket>();
         Client client = new Client(id, parametersArray[0].trim(), parametersArray[1].trim(), tickets);
         clients.add(client);
         System.out.println("Client added succesfully. Id: " + id.toString() + "\n");

@@ -3,9 +3,10 @@ package com.company.services;
 import com.company.models.Ticket;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TicketService {
-    private ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+    private List<Ticket> tickets = new ArrayList<Ticket>();
     private static TicketService instance = null;
 
     private TicketService() {

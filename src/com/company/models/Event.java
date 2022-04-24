@@ -1,6 +1,7 @@
 package com.company.models;
 
 import java.util.Date;
+import java.util.Set;
 import java.util.TreeSet;
 
 public abstract class Event {
@@ -10,9 +11,9 @@ public abstract class Event {
     private double ticketPrice;
     private Date date;
     private Location location;
-    private TreeSet<Sponsor> sponsors = new TreeSet<Sponsor>(new SponsorComparator());
+    private Set<Sponsor> sponsors = new TreeSet<Sponsor>(new SponsorComparator());
 
-    protected Event(Integer id, String name, Integer numberOfTickets, double ticketPrice, Date date, Location location, TreeSet<Sponsor> sponsors) {
+    protected Event(Integer id, String name, Integer numberOfTickets, double ticketPrice, Date date, Location location, Set<Sponsor> sponsors) {
         this.id = id;
         this.name = name;
         this.numberOfTickets = numberOfTickets;
@@ -71,7 +72,7 @@ public abstract class Event {
         return id;
     }
 
-    public TreeSet<Sponsor> getSponsors() {
+    public Set<Sponsor> getSponsors() {
         return sponsors;
     }
 

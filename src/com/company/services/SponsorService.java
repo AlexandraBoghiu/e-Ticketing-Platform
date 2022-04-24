@@ -3,9 +3,10 @@ package com.company.services;
 import com.company.models.Sponsor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SponsorService {
-    static private ArrayList<Sponsor> sponsors = new ArrayList<Sponsor>();
+    static private List<Sponsor> sponsors = new ArrayList<Sponsor>();
     static private Integer id = 0;
     private static SponsorService instance = null;
 

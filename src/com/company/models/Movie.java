@@ -1,6 +1,7 @@
 package com.company.models;
 
 import java.util.Date;
+import java.util.Set;
 import java.util.TreeSet;
 
 public class Movie extends CulturalEvent {
@@ -8,7 +9,7 @@ public class Movie extends CulturalEvent {
     final private Integer yearOfProduction;
 
     public Movie(Integer id, String name, Integer numberOfTickets, double ticketPrice, Date date, Location location,
-                 TreeSet<Sponsor> sponsors, String genre, String director, Integer yearOfProduction) {
+                 Set<Sponsor> sponsors, String genre, String director, Integer yearOfProduction) {
         super(id, name, numberOfTickets, ticketPrice, date, location, sponsors, genre);
         this.director = director;
         this.yearOfProduction = yearOfProduction;
