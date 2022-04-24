@@ -4,6 +4,8 @@ import com.company.models.Sponsor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Stream;
 
 public class SponsorService {
     static private List<Sponsor> sponsors = new ArrayList<Sponsor>();
@@ -47,16 +49,13 @@ public class SponsorService {
     public void getSponsors() {
         if (sponsors.size() == 0) {
             System.out.println("There are 0 sponsors :(.");
-        } else for (Sponsor sponsor : sponsors) {
-            System.out.println(sponsor);
+        } else {
+            sponsors.forEach((sponsors) -> System.out.println(sponsors));
         }
     }
 
     public void getSponsorsByType(String type) {
-        for (Sponsor sponsor : sponsors) {
-            if (sponsor.getType().equals(type.toLowerCase()))
-                System.out.println(sponsor);
-        }
+        sponsors.stream().filter(sponsor -> sponsor.getType().equals(type.toLowerCase())).forEach(sponsor -> System.out.println(sponsor));
     }
 
     public void deleteSponsorById(Integer id) {

@@ -60,8 +60,8 @@ public class ClientService {
     public void getClients() {
         if (clients.size() == 0) {
             System.out.println("There are 0 clients :(.");
-        } else for (Client client : clients) {
-            System.out.println(client);
+        } else {
+            clients.forEach((client) -> System.out.println(client));
         }
     }
 

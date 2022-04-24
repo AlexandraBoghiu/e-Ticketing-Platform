@@ -110,8 +110,8 @@ public class EventService {
     public void getEvents() {
         if (events.size() == 0) {
             System.out.println("There are 0 models.events.");
-        } else for (Event event : events) {
-            System.out.println(event);
+        } else {
+            events.forEach((event) -> System.out.println(event));
         }
     }
 
