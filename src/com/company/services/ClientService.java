@@ -8,9 +8,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ClientService {
-    static private ArrayList<Client> clients = new ArrayList<Client>();
-    static private Integer id = 0;
+    private static ArrayList<Client> clients = new ArrayList<Client>();
+    private static Integer id = 0;
+    private static ClientService instance = null;
 
+    private ClientService() {
+
+    }
+    public static ClientService getInstance() {
+        if (instance != null) {
+            return instance;
+        }
+        instance = new ClientService();
+        return instance;
+    }
     public void createClient(String parameters) {
         id++;
         String[] parametersArray = parameters.split(", ");
@@ -95,7 +106,7 @@ public class ClientService {
         String[] parametersArray = parameters.split(", ");
         Integer clientId = Integer.valueOf(parametersArray[0]);
         Integer eventId = Integer.valueOf(parametersArray[1]);
-        EventService eventService = new EventService();
+        EventService eventService = EventService.getInstance();
         Event event = eventService.getEventById(eventId);
         Client client = this.getClientById(clientId);
         if (client != null) {

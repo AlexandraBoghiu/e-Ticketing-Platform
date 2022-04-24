@@ -7,8 +7,17 @@ import java.util.ArrayList;
 public class SponsorService {
     static private ArrayList<Sponsor> sponsors = new ArrayList<Sponsor>();
     static private Integer id = 0;
+    private static SponsorService instance = null;
 
-    public SponsorService() {
+    private SponsorService() {
+
+    }
+    public static SponsorService getInstance() {
+        if (instance != null) {
+            return instance;
+        }
+        instance = new SponsorService();
+        return instance;
     }
 
     public void createSponsor(String parameters) {
@@ -52,7 +61,7 @@ public class SponsorService {
     public void deleteSponsorById(Integer id) {
         for (Sponsor sponsor : sponsors) {
             if (sponsor.getId().equals(id)) {
-                this.sponsors.remove(sponsor);
+                sponsors.remove(sponsor);
                 System.out.println(sponsor + " has been successfully removed.");
                 break;
             }

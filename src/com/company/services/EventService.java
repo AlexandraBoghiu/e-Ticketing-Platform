@@ -12,8 +12,17 @@ public class EventService {
     static private ArrayList<Event> events = new ArrayList<Event>();
     static private Integer id = 0;
     static private Integer locationId = 0;
+    private static EventService instance = null;
 
-    public EventService() {
+    private EventService() {
+
+    }
+    public static EventService getInstance() {
+        if (instance != null) {
+            return instance;
+        }
+        instance = new EventService();
+        return instance;
     }
 
     public void createFootballGameEvent(String parameters) throws ParseException {
@@ -127,7 +136,7 @@ public class EventService {
         String[] parametersArray = parameters.split(", ");
         Integer sponsorId = Integer.valueOf(parametersArray[1]);
         Integer eventId = Integer.valueOf(parametersArray[0]);
-        SponsorService sponsorService = new SponsorService();
+        SponsorService sponsorService = SponsorService.getInstance();
         Sponsor sponsor = sponsorService.getSponsorById(sponsorId);
         Event event = getEventById(eventId);
         if (event != null)

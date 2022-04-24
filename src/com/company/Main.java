@@ -1,9 +1,6 @@
 package com.company;
 
-import com.company.services.ClientService;
-import com.company.services.EventService;
-import com.company.services.LocationService;
-import com.company.services.SponsorService;
+import com.company.services.*;
 
 import java.util.Scanner;
 
@@ -11,10 +8,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        EventService eventService = new EventService();
-        ClientService clientService = new ClientService();
-        SponsorService sponsorService = new SponsorService();
-        LocationService locationService = new LocationService();
+        EventService eventService = EventService.getInstance();
+        ClientService clientService = ClientService.getInstance();
+        SponsorService sponsorService = SponsorService.getInstance();
+        LocationService locationService = LocationService.getInstance();
+        TicketService ticketService = TicketService.getInstance();
         String command, parameters;
         boolean admin = false;
         boolean client = false;

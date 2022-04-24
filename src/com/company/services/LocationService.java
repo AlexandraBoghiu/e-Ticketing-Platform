@@ -7,9 +7,17 @@ import java.util.ArrayList;
 public class LocationService {
     static private ArrayList<Location> locations = new ArrayList<Location>();
     static private Integer id = 0;
+    private static LocationService instance = null;
 
-    public LocationService() {
+    private LocationService() {
 
+    }
+    public static LocationService getInstance() {
+        if (instance != null) {
+            return instance;
+        }
+        instance = new LocationService();
+        return instance;
     }
 
     public Location getLocationById(Integer id) {
