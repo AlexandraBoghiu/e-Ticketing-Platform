@@ -10,7 +10,7 @@ public class CsvReader {
     static ReadService<String> readService = ReadService.getInstance();
     static EventService eventService = EventService.getInstance();
     static ClientService clientService = ClientService.getInstance();
-    SponsorService sponsorService = SponsorService.getInstance();
+    static SponsorService sponsorService = SponsorService.getInstance();
     LocationService locationService = LocationService.getInstance();
     TicketService ticketService = TicketService.getInstance();
 
@@ -49,11 +49,21 @@ public class CsvReader {
     public static void readMoviesFromCsv() throws FileNotFoundException, ParseException {
         List<String[]> parametersCsv = readService.read("csv/movie.csv");
         for (int k = 0; k < parametersCsv.size() - 1; k++) {
-     //       try {
+            try {
                 eventService.createMovieEvent(parametersCsv, true);
-        //    } catch (Exception e) {
-        //        System.out.println("Something didn't work.");
-     //       }
+            } catch (Exception e) {
+                System.out.println("Something didn't work.");
+            }
+        }
+    }
+    public static void readSponsorsFromCsv() throws FileNotFoundException, ParseException {
+        List<String[]> parametersCsv = readService.read("csv/sponsor.csv");
+        for (int k = 0; k < parametersCsv.size() - 1; k++) {
+            try {
+                sponsorService.createSponsor(parametersCsv, true);
+            } catch (Exception e) {
+                System.out.println("Something didn't work.");
+            }
         }
     }
 }

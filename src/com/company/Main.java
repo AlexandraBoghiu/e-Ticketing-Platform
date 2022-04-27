@@ -28,6 +28,7 @@ public class Main {
         CsvReader.readFootballGamesFromCsv();
         CsvReader.readConcertsFromCsv();
         CsvReader.readMoviesFromCsv();
+        CsvReader.readSponsorsFromCsv();
         System.out.println("Please type client for client rights or admin for admin rights.");
         String choice = scanner.nextLine().toLowerCase();
         if (!choice.equals("admin") && !choice.equals("client"))
@@ -122,7 +123,15 @@ public class Main {
                                 " name, type(gold/silver/bronze)");
                         parameters = scanner.nextLine();
                         try {
-                            sponsorService.createSponsor(parameters);
+                            List<String[]> parametersArray = new ArrayList<>(Collections.singletonList(parameters.split(", ")));
+                            sponsorService.createSponsor(parametersArray, false);
+                            String[] temp = new String[4];
+                            temp[0] = Concert.getIdCount().toString();
+                            for (int i = 0; i < parametersArray.get(0).length; i++) {
+                                temp[i + 1] = parametersArray.get(0)[i];
+                            }
+                            parametersArray.set(0, temp);
+                            writeService.writeToCsvFile(parametersArray, "csv/sponsor.csv");
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }

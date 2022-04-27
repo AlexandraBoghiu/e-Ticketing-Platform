@@ -15,6 +15,7 @@ public class SponsorService {
     private SponsorService() {
 
     }
+
     public static SponsorService getInstance() {
         if (instance != null) {
             return instance;
@@ -23,13 +24,32 @@ public class SponsorService {
         return instance;
     }
 
-    public void createSponsor(String parameters) {
-        id++;
-        String[] parametersArray = parameters.split(", ");
-        if (parametersArray[1].toLowerCase().equals("gold") || parametersArray[1].toLowerCase().equals("silver") || parametersArray[1].toLowerCase().equals("bronze")) {
-            Sponsor sponsor = new Sponsor(id, parametersArray[0], parametersArray[1].toLowerCase());
-            sponsors.add(sponsor);
+    public Sponsor createSponsor(List<String[]> parametersArray, boolean fromCsv) {
+        id = Sponsor.getIdSponsor() + 1;
+        if (fromCsv) {
+            try {
+                if (parametersArray.get(id)[2].toLowerCase().equals("gold") || parametersArray.get(id)[2].toLowerCase().equals("silver")
+                        || parametersArray.get(id)[2].toLowerCase().equals("bronze")) {
+                    Sponsor sponsor = new Sponsor(parametersArray.get(id)[1], parametersArray.get(id)[2].toLowerCase());
+                    sponsors.add(sponsor);
+                    return sponsor;
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid");
+            }
+        } else {
+            try {
+                if (parametersArray.get(0)[1].toLowerCase().equals("gold") || parametersArray.get(0)[1].toLowerCase().equals("silver")
+                        || parametersArray.get(0)[1].toLowerCase().equals("bronze")) {
+                    Sponsor sponsor = new Sponsor(parametersArray.get(0)[0], parametersArray.get(0)[1].toLowerCase());
+                    sponsors.add(sponsor);
+                    return sponsor;
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid");
+            }
         }
+        return null;
     }
 
     public void updateSponsor(String parameters) {
