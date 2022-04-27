@@ -7,9 +7,9 @@ import java.util.TreeSet;
 public abstract class CulturalEvent extends Event {
     final private String genre;
 
-    public CulturalEvent(Integer id, String name, Integer numberOfTickets, double ticketPrice, Date date, Location location,
+    public CulturalEvent(String name, Integer numberOfTickets, double ticketPrice, Date date, Location location,
                          Set<Sponsor> sponsors, String genre) {
-        super(id, name, numberOfTickets, ticketPrice, date, location, sponsors);
+        super(name, numberOfTickets, ticketPrice, date, location, sponsors);
         this.genre = genre;
     }
 

@@ -1,22 +1,33 @@
 package com.company;
 
+import com.company.helpers.CsvReader;
+import com.company.models.Client;
+import com.company.models.Concert;
+import com.company.models.FootballGame;
 import com.company.services.*;
 
-import java.util.Scanner;
+import java.io.FileNotFoundException;
+import java.text.ParseException;
+import java.util.*;
 
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException, ParseException {
         Scanner scanner = new Scanner(System.in);
         EventService eventService = EventService.getInstance();
         ClientService clientService = ClientService.getInstance();
         SponsorService sponsorService = SponsorService.getInstance();
         LocationService locationService = LocationService.getInstance();
         TicketService ticketService = TicketService.getInstance();
+        WriteService writeService = WriteService.getInstance();
         String command, parameters;
         boolean admin = false;
         boolean client = false;
         boolean connected = true;
+        CsvReader.readClientsFromCsv();
+        CsvReader.readFootballGamesFromCsv();
+        CsvReader.readConcertsFromCsv();
+        CsvReader.readMoviesFromCsv();
         System.out.println("Please type client for client rights or admin for admin rights.");
         String choice = scanner.nextLine().toLowerCase();
         if (!choice.equals("admin") && !choice.equals("client"))
@@ -35,10 +46,19 @@ public class Main {
                         System.out.println("You're creating a client. Please enter the client's data in the following format: firstName, lastName");
                         parameters = scanner.nextLine();
                         try {
-                            clientService.createClient(parameters);
+                            List<String[]> parametersArray = new ArrayList<>(Collections.singletonList(parameters.split(", ")));
+                            clientService.createClient(parametersArray, false, true);
+                            String[] temp = new String[3];
+                            temp[0] = Client.getIdCount().toString();
+                            for (int i = 0; i < parametersArray.get(0).length; i++) {
+                                temp[i + 1] = parametersArray.get(0)[i];
+                            }
+                            parametersArray.set(0, temp);
+                            writeService.writeToCsvFile(parametersArray, "csv/client.csv");
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
+
                         break;
                     case "createFootballGameEvent":
                         System.out.println("You're creating a football game event. Please enter the event's data in the following format:" +
@@ -46,7 +66,15 @@ public class Main {
                                 "address, firstTeam, secondTeam, stadium, competition");
                         parameters = scanner.nextLine();
                         try {
-                            eventService.createFootballGameEvent(parameters);
+                            List<String[]> parametersArray = new ArrayList<>(Collections.singletonList(parameters.split(", ")));
+                            eventService.createFootballGameEvent(parametersArray, false);
+                            String[] temp = new String[12];
+                            temp[0] = FootballGame.getIdCount().toString();
+                            for (int i = 0; i < parametersArray.get(0).length; i++) {
+                                temp[i + 1] = parametersArray.get(0)[i];
+                            }
+                            parametersArray.set(0, temp);
+                            writeService.writeToCsvFile(parametersArray, "csv/footballgame.csv");
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -57,7 +85,15 @@ public class Main {
                                 "address, genre, artist");
                         parameters = scanner.nextLine();
                         try {
-                            eventService.createConcertEvent(parameters);
+                            List<String[]> parametersArray = new ArrayList<>(Collections.singletonList(parameters.split(", ")));
+                            eventService.createConcertEvent(parametersArray, false);
+                            String[] temp = new String[10];
+                            temp[0] = Concert.getIdCount().toString();
+                            for (int i = 0; i < parametersArray.get(0).length; i++) {
+                                temp[i + 1] = parametersArray.get(0)[i];
+                            }
+                            parametersArray.set(0, temp);
+                            writeService.writeToCsvFile(parametersArray, "csv/concert.csv");
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -68,7 +104,15 @@ public class Main {
                                 "address, genre, director, yearOfProduction");
                         parameters = scanner.nextLine();
                         try {
-                            eventService.createMovieEvent(parameters);
+                            List<String[]> parametersArray = new ArrayList<>(Collections.singletonList(parameters.split(", ")));
+                            eventService.createMovieEvent(parametersArray, false);
+                            String[] temp = new String[11];
+                            temp[0] = Concert.getIdCount().toString();
+                            for (int i = 0; i < parametersArray.get(0).length; i++) {
+                                temp[i + 1] = parametersArray.get(0)[i];
+                            }
+                            parametersArray.set(0, temp);
+                            writeService.writeToCsvFile(parametersArray, "csv/concert.csv");
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -236,72 +280,73 @@ public class Main {
                         clientId = parametersArray[0];
                     } catch (Exception e) {
                         System.out.println("Wrong input.");
-                    } }
-                    if (loggedIn) {
-                        while (client) {
-                            System.out.println("Please enter a command. Available commands: getInfo, changePassword, getEvents, getSponsors, getSponsorsByType, buyTicket, exit ");
-                            command = scanner.nextLine();
-                            switch (command) {
-                                case "getInfo":
-                                    try {
-                                        clientService.getInfo(Integer.valueOf(clientId));
-                                    } catch (Exception e) {
-                                        System.out.println("Error. Please try again.");
-                                    }
-                                    break;
-                                case "changePassword":
-                                    System.out.println("You're changing your password. Please write your information in the following format: oldPassword, newPassword");
-                                    parameters = clientId.trim() + ", " + scanner.nextLine();
-                                    try {
-                                        clientService.changePassword(parameters);
-                                    } catch (Exception e) {
-                                        System.out.println("Not a valid input. Please try again.");
-                                    }
-                                    break;
-                                case "getEvents":
-                                    eventService.getEvents();
-                                    break;
-                                case "getTickets":
-                                    parameters = clientId.trim();
-                                    try {
-                                        clientService.getTicketsByClientId(Integer.valueOf(parameters));
-                                    } catch (Exception e) {
-                                        System.out.println("Not a valid input. Please try again.");
-                                    }
-                                    break;
-                                case "getSponsors":
-                                    sponsorService.getSponsors();
-                                    break;
-                                case "getSponsorsByType":
-                                    System.out.println("Please enter the desired type(gold/silver/bronze).");
-                                    parameters = scanner.nextLine();
-                                    try {
-                                        sponsorService.getSponsorsByType(parameters);
-                                    } catch (Exception e) {
-                                        System.out.println("Not a valid input. Please try again.");
-                                    }
-                                    break;
-                                case "buyTicket":
-                                    System.out.println("You're buying a ticket. Please enter the recipient's id (can be yours or a friend's) and the event's id in the following format: clientId, eventId");
+                    }
+                }
+                if (loggedIn) {
+                    while (client) {
+                        System.out.println("Please enter a command. Available commands: getInfo, changePassword, getEvents, getSponsors, getSponsorsByType, buyTicket, exit ");
+                        command = scanner.nextLine();
+                        switch (command) {
+                            case "getInfo":
+                                try {
+                                    clientService.getInfo(Integer.valueOf(clientId));
+                                } catch (Exception e) {
+                                    System.out.println("Error. Please try again.");
+                                }
+                                break;
+                            case "changePassword":
+                                System.out.println("You're changing your password. Please write your information in the following format: oldPassword, newPassword");
+                                parameters = clientId.trim() + ", " + scanner.nextLine();
+                                try {
+                                    clientService.changePassword(parameters);
+                                } catch (Exception e) {
+                                    System.out.println("Not a valid input. Please try again.");
+                                }
+                                break;
+                            case "getEvents":
+                                eventService.getEvents();
+                                break;
+                            case "getTickets":
+                                parameters = clientId.trim();
+                                try {
+                                    clientService.getTicketsByClientId(Integer.valueOf(parameters));
+                                } catch (Exception e) {
+                                    System.out.println("Not a valid input. Please try again.");
+                                }
+                                break;
+                            case "getSponsors":
+                                sponsorService.getSponsors();
+                                break;
+                            case "getSponsorsByType":
+                                System.out.println("Please enter the desired type(gold/silver/bronze).");
+                                parameters = scanner.nextLine();
+                                try {
+                                    sponsorService.getSponsorsByType(parameters);
+                                } catch (Exception e) {
+                                    System.out.println("Not a valid input. Please try again.");
+                                }
+                                break;
+                            case "buyTicket":
+                                System.out.println("You're buying a ticket. Please enter the recipient's id (can be yours or a friend's) and the event's id in the following format: clientId, eventId");
 
-                                    parameters = scanner.nextLine();
-                                    try {
-                                        clientService.buyTicket(parameters);
-                                    } catch (Exception e) {
-                                        System.out.println("Not a valid input. Please try again.");
-                                    }
-                                    break;
-                                case "exit":
-                                    System.out.println("Have a nice day! :D");
-                                    client = false;
-                                    connected = false;
-                                    break;
-                                default:
-                                    break;
-                            }
+                                parameters = scanner.nextLine();
+                                try {
+                                    clientService.buyTicket(parameters);
+                                } catch (Exception e) {
+                                    System.out.println("Not a valid input. Please try again.");
+                                }
+                                break;
+                            case "exit":
+                                System.out.println("Have a nice day! :D");
+                                client = false;
+                                connected = false;
+                                break;
+                            default:
+                                break;
                         }
                     }
                 }
             }
         }
     }
+}

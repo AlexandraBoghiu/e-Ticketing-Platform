@@ -6,11 +6,12 @@ import java.util.TreeSet;
 
 public class Concert extends CulturalEvent {
     final private String artist;
+    private static Integer idConcert = 0;
 
-
-    public Concert(Integer id, String name, Integer numberOfTickets, double ticketPrice, Date date, Location location,
+    public Concert(String name, Integer numberOfTickets, double ticketPrice, Date date, Location location,
                    Set<Sponsor> sponsors, String genre, String artist) {
-        super(id, name, numberOfTickets, ticketPrice, date, location, sponsors, genre);
+        super(name, numberOfTickets, ticketPrice, date, location, sponsors, genre);
+        idConcert++;
         this.artist = artist;
 
     }
@@ -19,6 +20,13 @@ public class Concert extends CulturalEvent {
         return artist;
     }
 
+    public static Integer getIdConcert() {
+        return idConcert;
+    }
+
+    public static void setIdConcert(Integer idConcert) {
+        Concert.idConcert = idConcert;
+    }
 
     @Override
     public String toString() {

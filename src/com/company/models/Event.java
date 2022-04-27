@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public abstract class Event {
+    static private Integer idCount = 0;
     final protected Integer id;
     private String name;
     private Integer numberOfTickets;
@@ -13,8 +14,9 @@ public abstract class Event {
     private Location location;
     private Set<Sponsor> sponsors = new TreeSet<Sponsor>(new SponsorComparator());
 
-    protected Event(Integer id, String name, Integer numberOfTickets, double ticketPrice, Date date, Location location, Set<Sponsor> sponsors) {
-        this.id = id;
+    protected Event(String name, Integer numberOfTickets, double ticketPrice, Date date, Location location, Set<Sponsor> sponsors) {
+        idCount++;
+        this.id = idCount;
         this.name = name;
         this.numberOfTickets = numberOfTickets;
         this.ticketPrice = ticketPrice;
@@ -70,6 +72,18 @@ public abstract class Event {
 
     public Integer getId() {
         return id;
+    }
+
+    public static Integer getIdCount() {
+        return idCount;
+    }
+
+    public static void setIdCount(Integer idCount) {
+        Event.idCount = idCount;
+    }
+
+    public void setSponsors(Set<Sponsor> sponsors) {
+        this.sponsors = sponsors;
     }
 
     public Set<Sponsor> getSponsors() {

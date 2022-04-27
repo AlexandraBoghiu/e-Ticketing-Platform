@@ -7,12 +7,22 @@ import java.util.TreeSet;
 public class Movie extends CulturalEvent {
     final private String director;
     final private Integer yearOfProduction;
+    private static Integer idMovie = 0;
 
-    public Movie(Integer id, String name, Integer numberOfTickets, double ticketPrice, Date date, Location location,
+    public Movie(String name, Integer numberOfTickets, double ticketPrice, Date date, Location location,
                  Set<Sponsor> sponsors, String genre, String director, Integer yearOfProduction) {
-        super(id, name, numberOfTickets, ticketPrice, date, location, sponsors, genre);
+        super(name, numberOfTickets, ticketPrice, date, location, sponsors, genre);
+        idMovie++;
         this.director = director;
         this.yearOfProduction = yearOfProduction;
+    }
+
+    public static Integer getIdMovie() {
+        return idMovie;
+    }
+
+    public static void setIdMovie(Integer idMovie) {
+        Movie.idMovie = idMovie;
     }
 
     public String getDirector() {
