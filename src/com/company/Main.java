@@ -7,19 +7,19 @@ import com.company.models.FootballGame;
 import com.company.services.*;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.*;
 
 
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException, ParseException {
+    public static void main(String[] args) throws IOException, ParseException {
         Scanner scanner = new Scanner(System.in);
         EventService eventService = EventService.getInstance();
         ClientService clientService = ClientService.getInstance();
         SponsorService sponsorService = SponsorService.getInstance();
-        LocationService locationService = LocationService.getInstance();
-        TicketService ticketService = TicketService.getInstance();
-        WriteService writeService = WriteService.getInstance();
+        WriteService writeService = new WriteService();
+        AuditService audit = new AuditService();
         String command, parameters;
         boolean admin = false;
         boolean client = false;
@@ -55,11 +55,11 @@ public class Main {
                                 temp[i + 1] = parametersArray.get(0)[i];
                             }
                             parametersArray.set(0, temp);
-                            writeService.writeToCsvFile(parametersArray, "csv/client.csv");
+                            writeService.writeToCsvFile(parametersArray, "src\\com\\company\\csv\\client.csv");
+                            audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
-
                         break;
                     case "createFootballGameEvent":
                         System.out.println("You're creating a football game event. Please enter the event's data in the following format:" +
@@ -75,7 +75,8 @@ public class Main {
                                 temp[i + 1] = parametersArray.get(0)[i];
                             }
                             parametersArray.set(0, temp);
-                            writeService.writeToCsvFile(parametersArray, "csv/footballgame.csv");
+                            writeService.writeToCsvFile(parametersArray, "src\\com\\company\\csv\\footballgame.csv");
+                            audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -94,7 +95,8 @@ public class Main {
                                 temp[i + 1] = parametersArray.get(0)[i];
                             }
                             parametersArray.set(0, temp);
-                            writeService.writeToCsvFile(parametersArray, "csv/concert.csv");
+                            writeService.writeToCsvFile(parametersArray, "src\\com\\company\\csv\\concert.csv");
+                            audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -113,7 +115,8 @@ public class Main {
                                 temp[i + 1] = parametersArray.get(0)[i];
                             }
                             parametersArray.set(0, temp);
-                            writeService.writeToCsvFile(parametersArray, "csv/concert.csv");
+                            writeService.writeToCsvFile(parametersArray, "src\\com\\company\\csv\\concert.csv");
+                            audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -131,7 +134,8 @@ public class Main {
                                 temp[i + 1] = parametersArray.get(0)[i];
                             }
                             parametersArray.set(0, temp);
-                            writeService.writeToCsvFile(parametersArray, "csv/sponsor.csv");
+                            writeService.writeToCsvFile(parametersArray, "src\\com\\company\\csv\\sponsor.csv");
+                            audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -142,6 +146,7 @@ public class Main {
                         parameters = scanner.nextLine();
                         try {
                             clientService.updateClient(parameters);
+                            audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -154,6 +159,7 @@ public class Main {
                         parameters = scanner.nextLine();
                         try {
                             eventService.updateFootballGameEvent(parameters);
+                            audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -166,6 +172,7 @@ public class Main {
                         parameters = scanner.nextLine();
                         try {
                             eventService.updateConcertEvent(parameters);
+                            audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -178,6 +185,7 @@ public class Main {
                         parameters = scanner.nextLine();
                         try {
                             eventService.updateMovieEvent(parameters);
+                            audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -188,33 +196,52 @@ public class Main {
                         parameters = scanner.nextLine();
                         try {
                             sponsorService.updateSponsor(parameters);
+                            audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
                         break;
                     case "getEvents":
-                        eventService.getEvents();
+                        try {
+                            eventService.getEvents();
+                            audit.writeToAudit(command);
+                        } catch (Exception e) {
+                            System.out.println("getEvents returned an exception.");
+                        }
                         break;
                     case "getClients":
-                        clientService.getClients();
+                        try {
+                            clientService.getClients();
+                            audit.writeToAudit(command);
+                        } catch (Exception e) {
+                            System.out.println("getClients returned an exception.");
+                        }
+
                         break;
                     case "getTicketsByClientId":
                         System.out.println("Please enter client's id");
                         parameters = scanner.nextLine();
                         try {
                             clientService.getTicketsByClientId(Integer.valueOf(parameters));
+                            audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
                         break;
                     case "getSponsors":
-                        sponsorService.getSponsors();
+                        try {
+                            sponsorService.getSponsors();
+                            audit.writeToAudit(command);
+                        } catch (Exception e) {
+                            System.out.println("getSponsors returned an exception.");
+                        }
                         break;
                     case "getSponsorsByType":
                         System.out.println("Please enter the desired type(gold/silver/bronze).");
                         parameters = scanner.nextLine();
                         try {
                             sponsorService.getSponsorsByType(parameters);
+                            audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -224,6 +251,7 @@ public class Main {
                         parameters = scanner.nextLine();
                         try {
                             eventService.addSponsorToEvent(parameters);
+                            audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -233,6 +261,7 @@ public class Main {
                         try {
                             Integer id = Integer.valueOf(scanner.nextLine());
                             eventService.deleteEventById(id);
+                            audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -242,6 +271,7 @@ public class Main {
                         try {
                             Integer clientId = Integer.valueOf(scanner.nextLine());
                             clientService.deleteClientById(clientId);
+                            audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -251,6 +281,7 @@ public class Main {
                         try {
                             Integer sponsorId = Integer.valueOf(scanner.nextLine());
                             sponsorService.deleteSponsorById(sponsorId);
+                            audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -260,6 +291,7 @@ public class Main {
                         parameters = scanner.nextLine();
                         try {
                             clientService.buyTicket(parameters);
+                            audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
                         }
@@ -299,6 +331,7 @@ public class Main {
                             case "getInfo":
                                 try {
                                     clientService.getInfo(Integer.valueOf(clientId));
+                                    audit.writeToAudit(command);
                                 } catch (Exception e) {
                                     System.out.println("Error. Please try again.");
                                 }
@@ -308,29 +341,43 @@ public class Main {
                                 parameters = clientId.trim() + ", " + scanner.nextLine();
                                 try {
                                     clientService.changePassword(parameters);
+                                    audit.writeToAudit(command);
                                 } catch (Exception e) {
                                     System.out.println("Not a valid input. Please try again.");
                                 }
                                 break;
                             case "getEvents":
-                                eventService.getEvents();
+                                try {
+                                    eventService.getEvents();
+                                    audit.writeToAudit(command);
+                                } catch (Exception e) {
+                                    System.out.println("getEvents returned an exception.");
+                                }
                                 break;
                             case "getTickets":
                                 parameters = clientId.trim();
                                 try {
                                     clientService.getTicketsByClientId(Integer.valueOf(parameters));
+                                    audit.writeToAudit(command);
                                 } catch (Exception e) {
                                     System.out.println("Not a valid input. Please try again.");
                                 }
                                 break;
                             case "getSponsors":
-                                sponsorService.getSponsors();
+                                try {
+                                    sponsorService.getSponsors();
+                                    audit.writeToAudit(command);
+                                } catch (Exception e) {
+                                    System.out.println("getSponsors returned an exception.");
+                                }
+
                                 break;
                             case "getSponsorsByType":
                                 System.out.println("Please enter the desired type(gold/silver/bronze).");
                                 parameters = scanner.nextLine();
                                 try {
                                     sponsorService.getSponsorsByType(parameters);
+                                    audit.writeToAudit(command);
                                 } catch (Exception e) {
                                     System.out.println("Not a valid input. Please try again.");
                                 }
@@ -341,6 +388,7 @@ public class Main {
                                 parameters = scanner.nextLine();
                                 try {
                                     clientService.buyTicket(parameters);
+                                    audit.writeToAudit(command);
                                 } catch (Exception e) {
                                     System.out.println("Not a valid input. Please try again.");
                                 }

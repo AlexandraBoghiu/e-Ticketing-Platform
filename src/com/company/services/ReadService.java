@@ -10,16 +10,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ReadService<T> {
-    private static ReadService instance = null;
 
-    private ReadService() {
-    }
-
-    public static ReadService getInstance() {
-        if (instance == null) {
-            instance = new ReadService();
-        }
-        return instance;
+    public ReadService() {
     }
 
     public List<T[]> read(String path) throws FileNotFoundException {
