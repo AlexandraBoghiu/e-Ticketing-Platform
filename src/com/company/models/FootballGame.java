@@ -40,8 +40,8 @@ public class FootballGame extends SportsEvent {
     @Override
     public String toString() {
         return "FootballGames{" +
-                "id=" + id +
-                "name='" + getName() + '\'' +
+                "id=" + id + '\'' +
+                ", name='" + getName() + '\'' +
                 ", numberOfTickets=" + getNumberOfTickets() +
                 ", ticketPrice=" + getTicketPrice() +
                 ", date=" + getDate() +

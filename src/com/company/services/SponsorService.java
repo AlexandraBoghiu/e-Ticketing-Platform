@@ -8,8 +8,8 @@ import java.util.Locale;
 import java.util.stream.Stream;
 
 public class SponsorService {
-    static private List<Sponsor> sponsors = new ArrayList<Sponsor>();
-    static private Integer id = 0;
+    private static List<Sponsor> sponsors = new ArrayList<Sponsor>();
+    private static Integer id = 0;
     private static SponsorService instance = null;
 
     private SponsorService() {

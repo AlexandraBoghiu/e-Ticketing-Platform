@@ -19,7 +19,7 @@ public class Main {
         ClientService clientService = ClientService.getInstance();
         SponsorService sponsorService = SponsorService.getInstance();
         WriteService writeService = new WriteService();
-        AuditService audit = new AuditService();
+        AuditService audit = AuditService.getInstance();
         String command, parameters;
         boolean admin = false;
         boolean client = false;
@@ -55,7 +55,7 @@ public class Main {
                                 temp[i + 1] = parametersArray.get(0)[i];
                             }
                             parametersArray.set(0, temp);
-                            writeService.writeToCsvFile(parametersArray, "src\\com\\company\\csv\\client.csv");
+                            writeService.writeToCsvFile(parametersArray, "src\\com\\company\\resources\\client.csv");
                             audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
@@ -75,7 +75,7 @@ public class Main {
                                 temp[i + 1] = parametersArray.get(0)[i];
                             }
                             parametersArray.set(0, temp);
-                            writeService.writeToCsvFile(parametersArray, "src\\com\\company\\csv\\footballgame.csv");
+                            writeService.writeToCsvFile(parametersArray, "src\\com\\company\\resources\\footballgame.csv");
                             audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
@@ -95,7 +95,7 @@ public class Main {
                                 temp[i + 1] = parametersArray.get(0)[i];
                             }
                             parametersArray.set(0, temp);
-                            writeService.writeToCsvFile(parametersArray, "src\\com\\company\\csv\\concert.csv");
+                            writeService.writeToCsvFile(parametersArray, "src\\com\\company\\resources\\concert.csv");
                             audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
@@ -115,7 +115,7 @@ public class Main {
                                 temp[i + 1] = parametersArray.get(0)[i];
                             }
                             parametersArray.set(0, temp);
-                            writeService.writeToCsvFile(parametersArray, "src\\com\\company\\csv\\concert.csv");
+                            writeService.writeToCsvFile(parametersArray, "src\\com\\company\\resources\\movie.csv");
                             audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
@@ -134,7 +134,7 @@ public class Main {
                                 temp[i + 1] = parametersArray.get(0)[i];
                             }
                             parametersArray.set(0, temp);
-                            writeService.writeToCsvFile(parametersArray, "src\\com\\company\\csv\\sponsor.csv");
+                            writeService.writeToCsvFile(parametersArray, "src\\com\\company\\resources\\sponsor.csv");
                             audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");

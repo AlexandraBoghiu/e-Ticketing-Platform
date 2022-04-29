@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.TreeSet;
 
 public class EventService {
-    static private List<Event> events = new ArrayList<Event>();
-    static private Integer id = 0;
-    static private Integer locationId = 0;
+    private static List<Event> events = new ArrayList<Event>();
+    private static Integer id = 0;
+    private static Integer locationId = 0;
     private static EventService instance = null;
 
     private EventService() {

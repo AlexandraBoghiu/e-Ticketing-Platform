@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LocationService {
-    static private List<Location> locations = new ArrayList<Location>();
-    static private Integer id = 0;
+    private static List<Location> locations = new ArrayList<Location>();
+    private static Integer id = 0;
     private static LocationService instance = null;
 
     private LocationService() {
