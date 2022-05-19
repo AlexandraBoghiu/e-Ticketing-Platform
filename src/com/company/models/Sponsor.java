@@ -2,13 +2,23 @@ package com.company.models;
 
 public class Sponsor {
     final private Integer id;
+    private static Integer idSponsor = 0;
     private String name;
     private String type;
 
-    public Sponsor(Integer id, String name, String type) {
-        this.id = id;
+    public Sponsor(String name, String type) {
+        idSponsor++;
+        this.id = idSponsor;
         this.name = name;
         this.type = type;
+    }
+
+    public static Integer getIdSponsor() {
+        return idSponsor;
+    }
+
+    public static void setIdSponsor(Integer idSponsor) {
+        Sponsor.idSponsor = idSponsor;
     }
 
     public Integer getId() {

@@ -6,18 +6,51 @@ import com.company.models.Ticket;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class ClientService {
-    static private ArrayList<Client> clients = new ArrayList<Client>();
-    static private Integer id = 0;
+    private static List<Client> clients = new ArrayList<Client>();
+    private static Integer id = 0;
+    private static ClientService instance = null;
 
-    public void createClient(String parameters) {
+    private ClientService() {
+
+    }
+
+    public static ClientService getInstance() {
+        if (instance != null) {
+            return instance;
+        }
+        instance = new ClientService();
+        return instance;
+    }
+
+    public Client createClient(List<String[]> parametersArray, boolean fromCsv, boolean print) {
         id++;
-        String[] parametersArray = parameters.split(", ");
-        ArrayList<Ticket> tickets = new ArrayList<Ticket>();
-        Client client = new Client(id, parametersArray[0].trim(), parametersArray[1].trim(), tickets);
-        clients.add(client);
-        System.out.println("Client added succesfully. Id: " + id.toString() + "\n");
+        List<Ticket> tickets = new ArrayList<Ticket>();
+
+        if (fromCsv) {
+            try {
+                Client client = new Client(parametersArray.get(id)[1].trim(), parametersArray.get(id)[2].trim(), tickets);
+                clients.add(client);
+                if (print)
+                    System.out.println("Client added succesfully. Id: " + id.toString() + "\n");
+                return client;
+            } catch (Exception e) {
+                System.out.println("Not enough data in the csv file.");
+            }
+        } else {
+            try {
+                Client client = new Client(parametersArray.get(0)[0].trim(), parametersArray.get(0)[1].trim(), tickets);
+                clients.add(client);
+                if (print)
+                    System.out.println("Client added succesfully. Id: " + id.toString() + "\n");
+                return client;
+            } catch (Exception e) {
+                System.out.println("Invalid.");
+            }
+        }
+        return null;
     }
 
     public void updateClient(String parameters) {
@@ -36,6 +69,7 @@ public class ClientService {
         }
         return null;
     }
+
     public void getInfo(Integer clientId) {
         for (Client client : clients) {
             if (client.getId().equals(clientId)) {
@@ -48,8 +82,8 @@ public class ClientService {
     public void getClients() {
         if (clients.size() == 0) {
             System.out.println("There are 0 clients :(.");
-        } else for (Client client : clients) {
-            System.out.println(client);
+        } else {
+            clients.forEach((client) -> System.out.println(client));
         }
     }
 
@@ -76,26 +110,26 @@ public class ClientService {
                 client.setPassword(parametersArray[1]);
         }
     }
+
     public boolean logIn(String parameters) {
         String[] parametersArray = parameters.split(", ");
         Integer clientId = Integer.valueOf(parametersArray[0]);
         String password = parametersArray[1];
         Client client = this.getClientById(clientId);
-        if (client != null)
-        {
+        if (client != null) {
             if (!client.getPassword().equals(password)) {
                 System.out.println("Wrong password.");
                 return false;
-            }
-            else return true;
+            } else return true;
         }
         return false;
     }
+
     public void buyTicket(String parameters) {
         String[] parametersArray = parameters.split(", ");
         Integer clientId = Integer.valueOf(parametersArray[0]);
         Integer eventId = Integer.valueOf(parametersArray[1]);
-        EventService eventService = new EventService();
+        EventService eventService = EventService.getInstance();
         Event event = eventService.getEventById(eventId);
         Client client = this.getClientById(clientId);
         if (client != null) {

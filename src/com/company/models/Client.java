@@ -1,16 +1,19 @@
 package com.company.models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Client {
+    static private Integer idCount = 0;
     final private Integer id;
     private String firstName;
     private String lastName;
     private String password;
-    private ArrayList<Ticket> tickets;
+    private List<Ticket> tickets = new ArrayList<>();
 
-    public Client(Integer id, String firstName, String lastName, ArrayList<Ticket> tickets) {
-        this.id = id;
+    public Client(String firstName, String lastName, List<Ticket> tickets) {
+        idCount++;
+        this.id = idCount;
         this.firstName = firstName;
         this.lastName = lastName;
         this.tickets = tickets;
@@ -45,12 +48,20 @@ public class Client {
         this.lastName = lastName;
     }
 
-    public ArrayList<Ticket> getTickets() {
+    public List<Ticket> getTickets() {
         return tickets;
     }
 
-    public void setTickets(ArrayList<Ticket> tickets) {
+    public void setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
+    }
+
+    public static Integer getIdCount() {
+        return idCount;
+    }
+
+    public static void setIdCount(Integer idCreator) {
+        Client.idCount = idCreator;
     }
 
     @Override

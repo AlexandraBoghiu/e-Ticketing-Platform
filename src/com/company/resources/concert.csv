@@ -1,0 +1,4 @@
+id,name,numberOfTickets,ticketPrice,date,country,city,address,genre,artist
+3,Smiley @ Sala Polivalenta,4000,500.5,31/05/2022 20:00,Romania,Bucharest,Sala Polivalenta,Pop,Smiley
+4,Placebo @ Romexpo,2000,300,13/07/2022 18:30,Romania,Bucharest,Roxempo,Alternative/Indie,Placebo
+5,Concert Luna Amara (acustic),200,70,09/05/2022 21:30,Romania,Bucharest,Hard Rock Cafe,Rock,Luna Amara
