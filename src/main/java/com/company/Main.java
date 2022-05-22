@@ -1,11 +1,14 @@
 package com.company;
 
+import com.company.config.DatabaseConfiguration;
 import com.company.helpers.CsvReader;
 import com.company.models.Client;
 import com.company.models.Concert;
 import com.company.models.FootballGame;
+import com.company.repository.SponsorRepository;
 import com.company.services.*;
 
+import javax.xml.crypto.Data;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
@@ -29,6 +32,10 @@ public class Main {
         CsvReader.readConcertsFromCsv();
         CsvReader.readMoviesFromCsv();
         CsvReader.readSponsorsFromCsv();
+
+        SponsorRepository sponsorRepository = new SponsorRepository();
+        sponsorRepository.createTable();
+        DatabaseConfiguration.closeDatabaseConnection();
         System.out.println("Please type client for client rights or admin for admin rights.");
         String choice = scanner.nextLine().toLowerCase();
         if (!choice.equals("admin") && !choice.equals("client"))

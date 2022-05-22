@@ -19,9 +19,9 @@ public class AuditService {
             return instance;
         }
         instance = new AuditService();
-        File yourFile = new File("src\\com\\company\\resources\\audit.csv");
+        File yourFile = new File("src\\main\\java\\com\\company\\resources\\audit.csv");
         if (yourFile.createNewFile()) {
-            try (FileWriter writer = new FileWriter("src\\com\\company\\resources\\audit.csv", true)) {
+            try (FileWriter writer = new FileWriter("src\\main\\java\\com\\company\\resources\\audit.csv", true)) {
                 writer.append("Action");
                 writer.append(",");
                 writer.append("Time");
