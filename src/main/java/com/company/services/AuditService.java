@@ -38,7 +38,7 @@ public class AuditService {
 
     public void writeToAudit(String write) throws IOException {
 
-        try (FileWriter writer = new FileWriter("src\\com\\company\\resources\\audit.csv", true)) {
+        try (FileWriter writer = new FileWriter("src\\main\\java\\com\\company\\resources\\audit.csv", true)) {
             writer.append(write);
             writer.append(",");
             writer.append(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")).toString());

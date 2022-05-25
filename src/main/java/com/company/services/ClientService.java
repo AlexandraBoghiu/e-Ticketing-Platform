@@ -3,7 +3,9 @@ package com.company.services;
 import com.company.models.Client;
 import com.company.models.Event;
 import com.company.models.Ticket;
+import com.company.repository.ClientRepository;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,12 +14,13 @@ public class ClientService {
     private static List<Client> clients = new ArrayList<Client>();
     private static Integer id = 0;
     private static ClientService instance = null;
+    ClientRepository clientRepository = ClientRepository.getInstance();
 
-    private ClientService() {
+    private ClientService() throws IOException {
 
     }
 
-    public static ClientService getInstance() {
+    public static ClientService getInstance() throws IOException {
         if (instance != null) {
             return instance;
         }
@@ -33,6 +36,7 @@ public class ClientService {
             try {
                 Client client = new Client(parametersArray.get(id)[1].trim(), parametersArray.get(id)[2].trim(), tickets);
                 clients.add(client);
+                clientRepository.addClient(client);
                 if (print)
                     System.out.println("Client added succesfully. Id: " + id.toString() + "\n");
                 return client;
@@ -43,6 +47,7 @@ public class ClientService {
             try {
                 Client client = new Client(parametersArray.get(0)[0].trim(), parametersArray.get(0)[1].trim(), tickets);
                 clients.add(client);
+                clientRepository.addClient(client);
                 if (print)
                     System.out.println("Client added succesfully. Id: " + id.toString() + "\n");
                 return client;
@@ -125,7 +130,7 @@ public class ClientService {
         return false;
     }
 
-    public void buyTicket(String parameters) {
+    public void buyTicket(String parameters) throws IOException {
         String[] parametersArray = parameters.split(", ");
         Integer clientId = Integer.valueOf(parametersArray[0]);
         Integer eventId = Integer.valueOf(parametersArray[1]);

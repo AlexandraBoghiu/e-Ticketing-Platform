@@ -2,21 +2,23 @@ package com.company;
 
 import com.company.config.DatabaseConfiguration;
 import com.company.helpers.CsvReader;
-import com.company.models.Client;
-import com.company.models.Concert;
-import com.company.models.FootballGame;
+import com.company.models.*;
+import com.company.repository.ClientRepository;
+import com.company.repository.ConcertRepository;
+import com.company.repository.MovieRepository;
 import com.company.repository.SponsorRepository;
 import com.company.services.*;
 
 import javax.xml.crypto.Data;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
-
 public class Main {
-    public static void main(String[] args) throws IOException, ParseException {
+    public static void main(String[] args) throws IOException, ParseException, SQLException {
         Scanner scanner = new Scanner(System.in);
         EventService eventService = EventService.getInstance();
         ClientService clientService = ClientService.getInstance();
@@ -27,15 +29,25 @@ public class Main {
         boolean admin = false;
         boolean client = false;
         boolean connected = true;
+        SponsorRepository sponsorRepository = SponsorRepository.getInstance();
+        sponsorRepository.createTable();
+
+        ClientRepository clientRepository = ClientRepository.getInstance();
+        clientRepository.createTable();
+
+        ConcertRepository concertRepository = ConcertRepository.getInstance();
+        concertRepository.createTable();
+
+        MovieRepository movieRepository = MovieRepository.getInstance();
+        movieRepository.createTable();
+
         CsvReader.readClientsFromCsv();
         CsvReader.readFootballGamesFromCsv();
         CsvReader.readConcertsFromCsv();
         CsvReader.readMoviesFromCsv();
         CsvReader.readSponsorsFromCsv();
 
-        SponsorRepository sponsorRepository = new SponsorRepository();
-        sponsorRepository.createTable();
-        DatabaseConfiguration.closeDatabaseConnection();
+
         System.out.println("Please type client for client rights or admin for admin rights.");
         String choice = scanner.nextLine().toLowerCase();
         if (!choice.equals("admin") && !choice.equals("client"))
@@ -62,7 +74,9 @@ public class Main {
                                 temp[i + 1] = parametersArray.get(0)[i];
                             }
                             parametersArray.set(0, temp);
-                            writeService.writeToCsvFile(parametersArray, "src\\com\\company\\resources\\client.csv");
+                            writeService.writeToCsvFile(parametersArray, "src\\main\\java\\com\\company\\resources\\client.csv");
+
+
                             audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
@@ -82,7 +96,7 @@ public class Main {
                                 temp[i + 1] = parametersArray.get(0)[i];
                             }
                             parametersArray.set(0, temp);
-                            writeService.writeToCsvFile(parametersArray, "src\\com\\company\\resources\\footballgame.csv");
+                            writeService.writeToCsvFile(parametersArray, "src\\main\\java\\com\\company\\resources\\footballgame.csv");
                             audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
@@ -102,7 +116,7 @@ public class Main {
                                 temp[i + 1] = parametersArray.get(0)[i];
                             }
                             parametersArray.set(0, temp);
-                            writeService.writeToCsvFile(parametersArray, "src\\com\\company\\resources\\concert.csv");
+                            writeService.writeToCsvFile(parametersArray, "src\\main\\java\\com\\company\\resources\\concert.csv");
                             audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
@@ -122,7 +136,7 @@ public class Main {
                                 temp[i + 1] = parametersArray.get(0)[i];
                             }
                             parametersArray.set(0, temp);
-                            writeService.writeToCsvFile(parametersArray, "src\\com\\company\\resources\\movie.csv");
+                            writeService.writeToCsvFile(parametersArray, "src\\main\\java\\com\\company\\resources\\movie.csv");
                             audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");
@@ -141,7 +155,7 @@ public class Main {
                                 temp[i + 1] = parametersArray.get(0)[i];
                             }
                             parametersArray.set(0, temp);
-                            writeService.writeToCsvFile(parametersArray, "src\\com\\company\\resources\\sponsor.csv");
+                            writeService.writeToCsvFile(parametersArray, "src\\main\\java\\com\\company\\resources\\sponsor.csv");
                             audit.writeToAudit(command);
                         } catch (Exception e) {
                             System.out.println("Not a valid input. Please try again.");

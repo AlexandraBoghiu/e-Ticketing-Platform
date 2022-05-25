@@ -1,7 +1,10 @@
 package com.company.services;
 
 import com.company.models.*;
+import com.company.repository.ConcertRepository;
+import com.company.repository.MovieRepository;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,12 +17,14 @@ public class EventService {
     private static Integer id = 0;
     private static Integer locationId = 0;
     private static EventService instance = null;
+    MovieRepository movieRepository = MovieRepository.getInstance();
+    ConcertRepository concertRepository = ConcertRepository.getInstance();
 
-    private EventService() {
+    private EventService() throws IOException {
 
     }
 
-    public static EventService getInstance() {
+    public static EventService getInstance() throws IOException {
         if (instance != null) {
             return instance;
         }
@@ -73,6 +78,7 @@ public class EventService {
                         Double.parseDouble(parametersArray.get(id)[3]), eventDate, location, sponsors,
                         parametersArray.get(id)[8].trim(), parametersArray.get(id)[9].trim());
                 events.add(concert);
+                concertRepository.addConcert(concert);
                 return concert;
             } catch (Exception e) {
                 System.out.println("Not enough data in the csv file.");
@@ -87,6 +93,7 @@ public class EventService {
                         Double.parseDouble(parametersArray.get(0)[2]), eventDate, location, sponsors,
                         parametersArray.get(0)[7].trim(), parametersArray.get(0)[8].trim());
                 events.add(concert);
+                concertRepository.addConcert(concert);
                 return concert;
             } catch (Exception e) {
                 System.out.println("Invalid.");
@@ -99,7 +106,7 @@ public class EventService {
         id = Movie.getIdMovie() + 1;
         locationId = Location.getIdLocation();
         if (fromCsv) {
-       //     try {
+            try {
                 TreeSet<Sponsor> sponsors = new TreeSet<Sponsor>(new SponsorComparator());
                 Location location = new Location(locationId, parametersArray.get(id)[5].trim(), parametersArray.get(id)[6].trim(), parametersArray.get(id)[7].trim());
                 Date eventDate = (new SimpleDateFormat("dd/MM/yyyy HH:mm")).parse(parametersArray.get(id)[4]);
@@ -107,12 +114,13 @@ public class EventService {
                         Double.parseDouble(parametersArray.get(id)[3]), eventDate, location, sponsors,
                         parametersArray.get(id)[8].trim(), parametersArray.get(0)[9].trim(), Integer.valueOf(parametersArray.get(id)[10]));
                 events.add(movie);
+                movieRepository.addMovie(movie);
                 return movie;
-          //  } catch (Exception e) {
-          //      System.out.println("Invalid.");
-          //  }
+            } catch (Exception e) {
+               System.out.println("Invalid.");
+            }
         } else {
-          //  try {
+            try {
                 TreeSet<Sponsor> sponsors = new TreeSet<Sponsor>(new SponsorComparator());
                 Location location = new Location(locationId, parametersArray.get(0)[4].trim(), parametersArray.get(0)[5].trim(), parametersArray.get(0)[6].trim());
                 Date eventDate = (new SimpleDateFormat("dd/MM/yyyy HH:mm")).parse(parametersArray.get(0)[3]);
@@ -120,13 +128,14 @@ public class EventService {
                         Double.parseDouble(parametersArray.get(0)[2]), eventDate, location, sponsors,
                         parametersArray.get(0)[7].trim(), parametersArray.get(0)[8].trim(), Integer.valueOf(parametersArray.get(0)[9]));
                 events.add(movie);
+                movieRepository.addMovie(movie);
                 return movie;
 
-          //  } catch (Exception e) {
-          //      System.out.println("Invalid.");
-          //  }
+           } catch (Exception e) {
+               System.out.println("Invalid.");
+           }
         }
-       // return null;
+       return null;
     }
 
 
@@ -197,7 +206,7 @@ public class EventService {
         return null;
     }
 
-    public void addSponsorToEvent(String parameters) {
+    public void addSponsorToEvent(String parameters) throws IOException {
         String[] parametersArray = parameters.split(", ");
         Integer sponsorId = Integer.valueOf(parametersArray[1]);
         Integer eventId = Integer.valueOf(parametersArray[0]);
@@ -209,4 +218,7 @@ public class EventService {
         else System.out.println(eventId + " does not exist.");
     }
 
+    public static Integer getLocationId() {
+        return locationId;
+    }
 }

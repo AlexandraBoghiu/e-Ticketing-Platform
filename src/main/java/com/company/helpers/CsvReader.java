@@ -3,14 +3,42 @@ package com.company.helpers;
 import com.company.services.*;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
 public class CsvReader {
     static ReadService<String> readService = new ReadService<>();
-    static EventService eventService = EventService.getInstance();
-    static ClientService clientService = ClientService.getInstance();
-    static SponsorService sponsorService = SponsorService.getInstance();
+    static EventService eventService;
+
+    static {
+        try {
+            eventService = EventService.getInstance();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static ClientService clientService;
+
+    static {
+        try {
+            clientService = ClientService.getInstance();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static SponsorService sponsorService;
+
+    static {
+        try {
+            sponsorService = SponsorService.getInstance();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     LocationService locationService = LocationService.getInstance();
     TicketService ticketService = TicketService.getInstance();
 

@@ -1,3 +1,4 @@
 "id	",name,numberOfTickets,ticketPrice,date,country,city,address,firstTeam,secondTeam,stadium,competition
 1,Poland - Sweden,55000,150,29/03/2022 21:45,Poland,Chorzow,Silesian Park,Poland,Sweden,Silesia Stadium,World Cup play-off
 2,Manchester City - Atletico Madrid,53000,40,05/04/2022 22:00,England,Manchester,Etihad Campus,Manchester  City,Atletico Madrid,Etihad Stadium,Champions League Quarter-final
+9,As Roma - Feyenoord,30000,30,25/05/2022 22:00,Albania,Tirana,Sheshi Italia 1,AS Roma,Feyenoord,Air Albania Stadium,Conference League

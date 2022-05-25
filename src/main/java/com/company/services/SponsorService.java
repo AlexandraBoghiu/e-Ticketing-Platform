@@ -1,7 +1,10 @@
 package com.company.services;
 
 import com.company.models.Sponsor;
+import com.company.repository.SponsorRepository;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -11,12 +14,12 @@ public class SponsorService {
     private static List<Sponsor> sponsors = new ArrayList<Sponsor>();
     private static Integer id = 0;
     private static SponsorService instance = null;
-
-    private SponsorService() {
+    SponsorRepository sponsorRepository = SponsorRepository.getInstance();
+    private SponsorService() throws IOException {
 
     }
 
-    public static SponsorService getInstance() {
+    public static SponsorService getInstance() throws IOException {
         if (instance != null) {
             return instance;
         }
@@ -32,6 +35,7 @@ public class SponsorService {
                         || parametersArray.get(id)[2].toLowerCase().equals("bronze")) {
                     Sponsor sponsor = new Sponsor(parametersArray.get(id)[1], parametersArray.get(id)[2].toLowerCase());
                     sponsors.add(sponsor);
+                    sponsorRepository.addSponsor(sponsor);
                     return sponsor;
                 }
             } catch (Exception e) {
@@ -43,6 +47,7 @@ public class SponsorService {
                         || parametersArray.get(0)[1].toLowerCase().equals("bronze")) {
                     Sponsor sponsor = new Sponsor(parametersArray.get(0)[0], parametersArray.get(0)[1].toLowerCase());
                     sponsors.add(sponsor);
+                    sponsorRepository.addSponsor(sponsor);
                     return sponsor;
                 }
             } catch (Exception e) {
@@ -56,6 +61,7 @@ public class SponsorService {
         String[] parametersArray = parameters.split(", ");
         Sponsor sponsor = getSponsorById(Integer.parseInt(parametersArray[0]));
         sponsor.setName(parametersArray[1]);
+        sponsorRepository.updateSponsorName(sponsor.getName(), sponsor.getId());
     }
 
     public Sponsor getSponsorById(Integer sponsorId) {
@@ -74,14 +80,17 @@ public class SponsorService {
         }
     }
 
-    public void getSponsorsByType(String type) {
+    public void getSponsorsByType(String type) throws IOException {
         sponsors.stream().filter(sponsor -> sponsor.getType().equals(type.toLowerCase())).forEach(sponsor -> System.out.println(sponsor));
+        System.out.println("From the database: ");
+        System.out.println(sponsorRepository.getSponsorByType(type));
     }
 
-    public void deleteSponsorById(Integer id) {
+    public void deleteSponsorById(Integer id) throws SQLException, IOException {
         for (Sponsor sponsor : sponsors) {
             if (sponsor.getId().equals(id)) {
                 sponsors.remove(sponsor);
+                sponsorRepository.deleteSponsor(id);
                 System.out.println(sponsor + " has been successfully removed.");
                 break;
             }
