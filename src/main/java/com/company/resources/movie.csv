@@ -2,3 +2,4 @@ id,name,numberOfTickets,ticketPrice,date,country,city,address,genre,director,yea
 6,Batman,120,25,14/04/2022 18:30,Romania,Buzau,Cinema City,action,Matt Reves,2022
 7,Sonic the Hedgehog,80,20,23/05/2022 18:45,Romania,Braila,Cinema City,action,Jeff Fowler,2022
 8,The Northman,60,10,05/05/2022 20:00,Romania,Targu Jiu,Cinema Sergiu Nicolaescu,action,Robert Eggers,2022
+11,Rosu aprins,200,15,12/07/2022 14:00,Romania,Oradea,Cinema City,Animatie,Domee Shi,2022

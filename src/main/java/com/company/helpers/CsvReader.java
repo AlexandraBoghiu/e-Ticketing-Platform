@@ -3,19 +3,47 @@ package com.company.helpers;
 import com.company.services.*;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.List;
 
 public class CsvReader {
     static ReadService<String> readService = new ReadService<>();
-    static EventService eventService = EventService.getInstance();
-    static ClientService clientService = ClientService.getInstance();
-    static SponsorService sponsorService = SponsorService.getInstance();
+    static EventService eventService;
+
+    static {
+        try {
+            eventService = EventService.getInstance();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static ClientService clientService;
+
+    static {
+        try {
+            clientService = ClientService.getInstance();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static SponsorService sponsorService;
+
+    static {
+        try {
+            sponsorService = SponsorService.getInstance();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     LocationService locationService = LocationService.getInstance();
     TicketService ticketService = TicketService.getInstance();
 
     public static void readClientsFromCsv() throws FileNotFoundException {
-        List<String[]> parametersCsv = readService.read("src\\com\\company\\resources\\client.csv");
+        List<String[]> parametersCsv = readService.read("src\\main\\java\\com\\company\\resources\\client.csv");
         for (int k = 0; k < parametersCsv.size() - 1; k++) {
             try {
                 clientService.createClient(parametersCsv, true, false);
@@ -26,7 +54,7 @@ public class CsvReader {
     }
 
     public static void readFootballGamesFromCsv() throws FileNotFoundException, ParseException {
-        List<String[]> parametersCsv = readService.read("src\\com\\company\\resources\\footballgame.csv");
+        List<String[]> parametersCsv = readService.read("src\\main\\java\\com\\company\\resources\\footballgame.csv");
         for (int k = 0; k < parametersCsv.size() - 1; k++) {
             try {
                 eventService.createFootballGameEvent(parametersCsv, true);
@@ -37,7 +65,7 @@ public class CsvReader {
     }
 
     public static void readConcertsFromCsv() throws FileNotFoundException, ParseException {
-        List<String[]> parametersCsv = readService.read("src\\com\\company\\resources\\concert.csv");
+        List<String[]> parametersCsv = readService.read("src\\main\\java\\com\\company\\resources\\concert.csv");
         for (int k = 0; k < parametersCsv.size() - 1; k++) {
             try {
                 eventService.createConcertEvent(parametersCsv, true);
@@ -47,7 +75,7 @@ public class CsvReader {
         }
     }
     public static void readMoviesFromCsv() throws FileNotFoundException, ParseException {
-        List<String[]> parametersCsv = readService.read("src\\com\\company\\resources\\movie.csv");
+        List<String[]> parametersCsv = readService.read("src\\main\\java\\com\\company\\resources\\movie.csv");
         for (int k = 0; k < parametersCsv.size() - 1; k++) {
             try {
                 eventService.createMovieEvent(parametersCsv, true);
@@ -57,7 +85,7 @@ public class CsvReader {
         }
     }
     public static void readSponsorsFromCsv() throws FileNotFoundException, ParseException {
-        List<String[]> parametersCsv = readService.read("src\\com\\company\\resources\\sponsor.csv");
+        List<String[]> parametersCsv = readService.read("src\\main\\java\\com\\company\\resources\\sponsor.csv");
         for (int k = 0; k < parametersCsv.size() - 1; k++) {
             try {
                 sponsorService.createSponsor(parametersCsv, true);
