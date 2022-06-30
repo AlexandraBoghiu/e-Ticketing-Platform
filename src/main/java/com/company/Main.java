@@ -47,7 +47,6 @@ public class Main {
         CsvReader.readMoviesFromCsv();
         CsvReader.readSponsorsFromCsv();
 
-
         System.out.println("Please type client for client rights or admin for admin rights.");
         String choice = scanner.nextLine().toLowerCase();
         if (!choice.equals("admin") && !choice.equals("client"))

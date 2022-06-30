@@ -33,7 +33,7 @@ public class MovieRepository {
                 "director varchar(30)," +
                 "yearOfProduction int)";
         Connection connection = DatabaseConfiguration.getDatabaseConnection();
-        try {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(createTableSql)){
             Statement stat = connection.createStatement();
             stat.execute(createTableSql);
             audit.writeToAudit("createMovieTableDB");

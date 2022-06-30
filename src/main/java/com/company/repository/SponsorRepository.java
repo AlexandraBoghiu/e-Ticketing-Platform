@@ -29,7 +29,7 @@ public class SponsorRepository {
                 "name varchar(30), " +
                 "type varchar(30))";
         Connection connection = DatabaseConfiguration.getDatabaseConnection();
-        try {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(createTableSql)){
             Statement stat = connection.createStatement();
             stat.execute(createTableSql);
             audit.writeToAudit("createSponsorTableDB");

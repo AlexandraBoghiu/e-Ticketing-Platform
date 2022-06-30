@@ -33,7 +33,7 @@ public class ConcertRepository {
                 "genre varchar(30), " +
                 "artist varchar(30))";
         Connection connection = DatabaseConfiguration.getDatabaseConnection();
-        try {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(createTableSql)){
             Statement stat = connection.createStatement();
             stat.execute(createTableSql);
             audit.writeToAudit("createConcertTableDB");

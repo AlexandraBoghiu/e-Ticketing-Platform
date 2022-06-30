@@ -28,10 +28,10 @@ public class ClientRepository {
     public void createTable() {
         String createTableSql = "CREATE TABLE IF NOT EXISTS client " +
                 "(id int PRIMARY KEY AUTO_INCREMENT, " +
-                "name varchar(50)," +
+                "firstname varchar(50)," +
                 "lastname varchar(30))";
         Connection connection = DatabaseConfiguration.getDatabaseConnection();
-        try {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(createTableSql)){
             Statement stat = connection.createStatement();
             stat.execute(createTableSql);
             audit.writeToAudit("createClientTabletDB");
