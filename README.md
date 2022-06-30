@@ -35,13 +35,16 @@ Map, etc.) of which at least one must be sorted - uni- arrays will be used.
 
 Stage II
 1) Extend the project from the first stage by making persistence using files:
-  - [ ] Make CSV files for at least 4 of the classes defined in the first stage. Each column in the file is separated by comma. Example: first name, last name, age
-  - [ ] Generic singleton services will be created for writing and reading from files;
-  - [ ] When starting the program, the data from the files will be loaded using the services created;
+  - [x] Make CSV files for at least 4 of the classes defined in the first stage. Each column in the file is separated by comma. Example: first name, last name, age
+      - *audit.csv, client.csv, concert.csv, footballgame.csv, movie.csv, sponsor.csv*
+  - [x] Generic singleton services will be created for writing and reading from files;
+      - *ReadService, WriteService*
+  - [x] When starting the program, the data from the files will be loaded using the services created;
 
 2) Creation of an audit service
-  - [ ] A service will be created to write to a CSV file each time one of the actions described in the first step is executed. File structure: action_name, timestamp
-
-Step III
-  - [ ] Replace the services made in step II with services that provide persistence using JDBC.
-  - [ ] Make services that expose create, read, update and delete operations for at least 4 of the defined classes.
+  - [x] A service will be created to write to a CSV file each time one of the actions described in the first step is executed. File structure: action_name, timestamp
+      - *AuditService*
+      
+Stage III
+  - [x] Replace the services made in step II with services that provide persistence using JDBC.
+  - [x] Make services that expose create, read, update and delete operations for at least 4 of the defined classes.
